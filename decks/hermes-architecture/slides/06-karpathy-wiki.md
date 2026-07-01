@@ -1,6 +1,6 @@
 # 🗂 GitHub Structure — Karpathy LLM Wiki Pattern
 
-> How `hermes-wiki` applies Karpathy's five-layer knowledge graph pattern, and what's still missing.
+> How `hermes-wiki` is organized today. What we have, where it lives.
 
 ---
 
@@ -51,80 +51,95 @@ Reference: <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519
 
 ---
 
-## Our Application Status
+## What `hermes-wiki` Has Today
 
-| Layer | Status | What's in it |
+| Layer | Status | What lives there |
 |---|---|---|
-| **① raw/** | ⚪ empty | reserved for research source originals |
-| **② research/** | ⚠️ **empty** | typed pages not yet created (entities/concepts/comparisons) |
-| **③ operational/** | ✅ populated | analysis · architecture · code · infra · watchlist · solopreneur · repos · people |
-| **④ logs/** | ✅ submodule | `hermes-logs` with `YYYY-MM-DD-HHMM.md` timestamped files |
-| **⑤ schema/** | ✅ populated | `AGENTS.md` + `SCHEMA.md` (8 lint rules) |
+| **① raw/** | empty | — |
+| **② research/** | empty | — |
+| **③ operational/** | populated | `analysis/` · `architecture/` · `code/` · `infra/` · `watchlist/` · `solopreneur/` · `repos/` · `people/` |
+| **④ logs/** | submodule | `hermes-logs` with `YYYY-MM-DD-HHMM.md` timestamped files |
+| **⑤ schema/** | populated | `AGENTS.md` (Karpathy 5-layer rules) + `SCHEMA.md` (8 lint rules) |
 
-<div class="small">
+---
 
-Three of five layers populated. Two gaps to close.
+## `operational/` in Detail
 
+This is the layer we actively use. Eight sub-domains, each with its own folder:
+
+<div class="flow-chart">
+  <div class="flow-group">
+    <span class="flow-group-label">③ operational/ — what we write today</span>
+    <div class="flow-row">
+      <div class="flow-node long-term">
+        <span class="node-label">analysis/</span>
+        <span class="node-sub">5 pages — methodology, rating, valuation, langgraph, pipeline</span>
+      </div>
+      <div class="flow-node long-term">
+        <span class="node-label">architecture/</span>
+        <span class="node-sub">3 pages — hermes-vs-chatbot, hybrid-stack, ssot</span>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-node long-term">
+        <span class="node-label">infra/</span>
+        <span class="node-sub">cron, env, gh-token, gateway, etc.</span>
+      </div>
+      <div class="flow-node long-term">
+        <span class="node-label">code/</span>
+        <span class="node-sub">script catalog</span>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-node long-term">
+        <span class="node-label">watchlist/</span>
+        <span class="node-sub">stock universe</span>
+      </div>
+      <div class="flow-node long-term">
+        <span class="node-label">repos/</span>
+        <span class="node-sub">repo documentation</span>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-node long-term">
+        <span class="node-label">solopreneur/</span>
+        <span class="node-sub">freelancing strategy</span>
+      </div>
+      <div class="flow-node long-term">
+        <span class="node-label">people/</span>
+        <span class="node-sub">user profile (aiprofit)</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 ---
 
-## What's NOT Applied Yet (Resolution Plan)
+## `logs/` and `schema/` — Supporting Layers
 
-| Gap | Why it matters | Resolution |
-|---|---|---|
-| **Empty `research/`** | Typed pages enable graph RAG, structured retrieval, semantic search across entities | Create `entities/`, `concepts/`, `comparisons/` pages with frontmatter (`type: entity/concept/comparison`) |
-| **Empty `raw/`** | Original sources aren't preserved — research loses traceability | Save every research source to `raw/` BEFORE writing the wiki page |
-| **Frontmatter on operational/** | Lint coverage is partial (research/ only enforced) | Extend SCHEMA.md lint to validate frontmatter across operational pages too |
-| **Log submodule coupling** | `hermes-logs` lives in submodule, not inside `hermes-wiki` directly | Optional: merge logs into `hermes-wiki/logs/` for atomic clone |
+**`logs/`** lives as a git submodule (`hermes-logs`). Each significant change writes a timestamped file:
 
----
-
-## The Three Resolutions in Detail
-
-### 1. Populate `research/` with typed pages
-
-Each page follows the typed schema from `SCHEMA.md`:
-
-```yaml
----
-type: entity | concept | comparison
-title: Page name
-created: YYYY-MM-DD
-updated: YYYY-MM-DD
-tags: [research, type, ...]
-sources: [raw/source-file.md]
-confidence: high | medium | low
----
+```
+logs/
+├── index.md                        ← chrono index of all events
+├── YYYY/                           ← year directories
+│   └── YYYY-MM-DD-HHMM.md          ← one file per significant change
+└── archive/                        ← 6mo+ old logs
 ```
 
-**Candidates to create**:
-- entities/: Codex CLI, Claude Code, Sonnet, Ollama, Honcho
-- concepts/: skill compound loop, SSoT, multi-agent chain
-- comparisons/: Codex vs Claude Code, Honcho vs pgvector
+**`schema/`** (root of repo) defines the rules every page must follow:
 
-### 2. Save sources to `raw/` first
-
-The ingest rule: **raw → research → log**. No page is written without its source in `raw/`.
-
-### 3. Extend lint to all pages
-
-Move from partial lint (research/ only) to full lint (operational/ too) — every page must pass frontmatter validation.
+- `AGENTS.md` — Karpathy 5-layer structure, Wiki-First rule, Memory discipline, 8 lint rules
+- `SCHEMA.md` — frontmatter taxonomy (research/ requires `type/title/created/updated/tags/sources/confidence`)
 
 ---
 
-## Result After Resolution
+## `INDEX.md` — The Single Entry Point
 
-| Layer | Before | After |
-|---|---|---|
-| ① raw/ | ⚪ | ✅ sources preserved |
-| ② research/ | ⚠️ empty | ✅ typed pages fill graph |
-| ③ operational/ | ✅ | ✅ + frontmatter lint |
-| ④ logs/ | ✅ | ✅ |
-| ⑤ schema/ | ✅ | ✅ + full lint |
+Every page in the wiki is listed in `index.md` with one-line descriptions. Wiki-First rule: read INDEX first, follow `related:` frontmatter for graph traversal, then load specific pages.
 
 <div class="small">
 
-Closing these gaps transforms hermes-wiki from a notes archive into a queryable knowledge graph.
+**Total**: ~31 pages across 8 operational sub-domains, 5 timestamped log entries, 2 schema files. Empty `raw/` and `research/` layers are present as folders but contain no pages.
 
 </div>
