@@ -110,6 +110,33 @@ fallback_chain:
 
 ---
 
+# How We Remember
+
+<div style="text-align:center; margin:1em 0;">
+
+<p><img src="../../assets/img/wiki-architecture.svg" alt="LLM Wiki + GitHub submodule architecture: Karpathy gist → INDEX.md → 5 layers (schema, raw, research, operational, logs) → 4 submodules (logs, subagents-library, skills-library, agents-library) under hermes-wiki-super" style="max-width:100%;height:auto;"></p>
+
+</div>
+
+<p><strong>The pattern in one sentence</strong> — Karpathy's <em>LLM Wiki</em> gives every page a master <code>INDEX.md</code> + concise interlinked pages, and we deploy it as <strong>one super repo with four Git submodules</strong> so each topic gets independent history but one clone gets everything.</p>
+
+<table>
+<thead>
+<tr><th>Layer</th><th>What lives there</th><th>Why it exists</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Schema</strong></td><td><code>SCHEMA.md</code> · <code>AGENTS.md</code> · lint rules</td><td>lets an agent extend the wiki without breaking it</td></tr>
+<tr><td><strong>Raw</strong></td><td>immutable copies of external sources</td><td>provenance — never edit, only quote</td></tr>
+<tr><td><strong>Research</strong></td><td>typed pages: entity / concept / comparison</td><td>frontmatter enables Graph RAG queries</td></tr>
+<tr><td><strong>Operational</strong></td><td>infra · analysis · code · repos · people</td><td>free-form knowledge we actually use day-to-day</td></tr>
+<tr><td><strong>Logs</strong></td><td>timestamped change history (separate repo)</td><td>every meaningful edit has a diff trail</td></tr>
+</tbody>
+</table>
+
+<p><strong>Why submodules, not one mega-repo</strong> — each topic lives in its own private GitHub repo (<code>hermes-wiki-claude-code</code>, <code>hermes-wiki-codex</code>, <code>hermes-wiki-super</code>, <code>harness-engineering-wiki</code>). The super repo pulls them in as submodules. Result: independent version history per topic, no merge conflicts, and one <code>git clone --recurse-submodules</code> gives the agent the full KB.</p>
+
+---
+
 # What This Deck Used
 
 <table>

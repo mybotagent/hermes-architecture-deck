@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" width="1000" height="620" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif">
+  <defs>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.07"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0066cc"/>
+    </marker>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#86868b"/>
+    </marker>
+  </defs>
+
+  <style>
+    .box { fill: #ffffff; stroke: #d2d2d7; stroke-width: 1.2; rx: 14; ry: 14; }
+    .box-blue { fill: #ffffff; stroke: #0066cc; stroke-width: 1.8; rx: 14; ry: 14; }
+    .box-tinted { fill: rgba(0,102,204,0.04); stroke: #0066cc; stroke-width: 1.8; rx: 14; ry: 14; }
+    .box-layer { fill: #fafafc; stroke: #d2d2d7; stroke-width: 1; rx: 8; ry: 8; }
+    .box-sub { fill: #ffffff; stroke: #86868b; stroke-width: 1; rx: 8; ry: 8; stroke-dasharray: 3,3; }
+    .label { font-size: 17px; font-weight: 600; fill: #1d1d1f; }
+    .label-sm { font-size: 12px; font-weight: 500; fill: #6e6e73; }
+    .label-xs { font-size: 10px; font-weight: 400; fill: #86868b; font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
+    .label-blue { font-size: 16px; font-weight: 600; fill: #0066cc; }
+    .label-section { font-size: 11px; font-weight: 600; fill: #86868b; letter-spacing: 1.5px; text-transform: uppercase; }
+    .arrow { stroke: #0066cc; stroke-width: 1.8; fill: none; }
+    .arrow-gray { stroke: #86868b; stroke-width: 1.2; fill: none; stroke-dasharray: 3,3; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1000" height="620" fill="#ffffff"/>
+
+  <!-- Section labels -->
+  <text x="170" y="50" text-anchor="middle" class="label-section">Karpathy LLM Wiki</text>
+  <text x="500" y="50" text-anchor="middle" class="label-section">5 Layers</text>
+  <text x="830" y="50" text-anchor="middle" class="label-section">GitHub Submodules</text>
+
+  <!-- LEFT: Karpathy reference -->
+  <g filter="url(#cardShadow)">
+    <rect x="40" y="80" width="260" height="120" class="box"/>
+    <text x="170" y="115" text-anchor="middle" class="label">Karpathy Gist</text>
+    <text x="170" y="145" text-anchor="middle" class="label-sm">LLM-consumable</text>
+    <text x="170" y="163" text-anchor="middle" class="label-sm">knowledge base</text>
+    <text x="170" y="185" text-anchor="middle" class="label-xs">gist.github.com/karpathy/</text>
+    <text x="170" y="198" text-anchor="middle" class="label-xs">442a6bf555914893e9891c11519de94f</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="40" y="220" width="260" height="120" class="box-blue"/>
+    <text x="170" y="255" text-anchor="middle" class="label-blue">INDEX.md</text>
+    <text x="170" y="280" text-anchor="middle" class="label-sm">master table of contents</text>
+    <text x="170" y="298" text-anchor="middle" class="label-sm">+ related links graph</text>
+    <text x="170" y="320" text-anchor="middle" class="label-xs">read first · every session</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="40" y="360" width="260" height="120" class="box"/>
+    <text x="170" y="395" text-anchor="middle" class="label">Concise pages</text>
+    <text x="170" y="420" text-anchor="middle" class="label-sm">1–5 KB each · interlinked</text>
+    <text x="170" y="438" text-anchor="middle" class="label-sm">no Google-page-1 trivia</text>
+    <text x="170" y="460" text-anchor="middle" class="label-xs">unique insight only</text>
+  </g>
+
+  <!-- CENTER: 5 Layers (stacked) -->
+  <g filter="url(#cardShadow)">
+    <rect x="380" y="80" width="240" height="60" class="box-layer"/>
+    <text x="500" y="105" text-anchor="middle" class="label">① Schema</text>
+    <text x="500" y="125" text-anchor="middle" class="label-xs">SCHEMA.md · AGENTS.md · lint rules</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="380" y="155" width="240" height="60" class="box-layer"/>
+    <text x="500" y="180" text-anchor="middle" class="label">② Raw</text>
+    <text x="500" y="200" text-anchor="middle" class="label-xs">immutable external sources</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="380" y="230" width="240" height="60" class="box-tinted"/>
+    <text x="500" y="255" text-anchor="middle" class="label-blue">③ Research</text>
+    <text x="500" y="275" text-anchor="middle" class="label-xs">entity · concept · comparison</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="380" y="305" width="240" height="60" class="box-layer"/>
+    <text x="500" y="330" text-anchor="middle" class="label">④ Operational</text>
+    <text x="500" y="350" text-anchor="middle" class="label-xs">infra · analysis · code · repos</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="380" y="380" width="240" height="60" class="box-layer"/>
+    <text x="500" y="405" text-anchor="middle" class="label">⑤ Logs</text>
+    <text x="500" y="425" text-anchor="middle" class="label-xs">timestamped change history</text>
+  </g>
+
+  <!-- Center subtitle -->
+  <text x="500" y="495" text-anchor="middle" class="label-sm">↑ each layer has its own git history</text>
+  <text x="500" y="513" text-anchor="middle" class="label-sm">↑ typed schema enables Graph RAG queries</text>
+
+  <!-- RIGHT: GitHub Submodules -->
+  <g filter="url(#cardShadow)">
+    <rect x="680" y="80" width="280" height="60" class="box-blue"/>
+    <text x="820" y="105" text-anchor="middle" class="label-blue">hermes-wiki-super</text>
+    <text x="820" y="125" text-anchor="middle" class="label-xs">super repo · 4 submodules · private</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="680" y="160" width="280" height="56" class="box-sub"/>
+    <text x="820" y="183" text-anchor="middle" class="label-sm" style="font-weight:600;">logs/</text>
+    <text x="820" y="202" text-anchor="middle" class="label-xs">hermes-logs · 6mo archive</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="680" y="225" width="280" height="56" class="box-sub"/>
+    <text x="820" y="248" text-anchor="middle" class="label-sm" style="font-weight:600;">subagents-library/</text>
+    <text x="820" y="267" text-anchor="middle" class="label-xs">reusable delegation templates</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="680" y="290" width="280" height="56" class="box-sub"/>
+    <text x="820" y="313" text-anchor="middle" class="label-sm" style="font-weight:600;">skills-library/</text>
+    <text x="820" y="332" text-anchor="middle" class="label-xs">SKILL.md repository</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="680" y="355" width="280" height="56" class="box-sub"/>
+    <text x="820" y="378" text-anchor="middle" class="label-sm" style="font-weight:600;">agents-library/</text>
+    <text x="820" y="397" text-anchor="middle" class="label-xs">AGENTS.md · agent role templates</text>
+  </g>
+
+  <!-- Right subtitle -->
+  <text x="820" y="445" text-anchor="middle" class="label-sm">↑ each submodule = independent GitHub repo</text>
+  <text x="820" y="463" text-anchor="middle" class="label-sm">↑ one `git clone --recurse` gives everything</text>
+
+  <!-- Bottom: separate topic repos -->
+  <g filter="url(#cardShadow)">
+    <rect x="40" y="510" width="920" height="80" class="box" style="fill:#fafafc;"/>
+    <text x="60" y="538" class="label">Topic-specific repos</text>
+    <text x="60" y="558" class="label-xs" style="font-size:13px;">hermes-wiki-claude-code · hermes-wiki-codex · hermes-wiki-super · harness-engineering-wiki</text>
+    <text x="60" y="578" class="label-xs" style="font-size:11px;fill:#6e6e73;">each topic gets its own private GitHub repo with its own Karpathy-style INDEX.md</text>
+  </g>
+
+  <!-- Arrows: Karpathy → 5 Layers -->
+  <path d="M 300 140 L 375 140" class="arrow" marker-end="url(#arrow)"/>
+  <path d="M 300 280 L 375 260" class="arrow" marker-end="url(#arrow)"/>
+  <path d="M 300 420 L 375 380" class="arrow" marker-end="url(#arrow)"/>
+
+  <!-- Arrows: 5 Layers → Submodules -->
+  <path d="M 620 110 L 678 110" class="arrow" marker-end="url(#arrow)"/>
+  <path d="M 620 410 L 678 188" class="arrow" marker-end="url(#arrow)"/>
+  <path d="M 620 410 L 678 253" class="arrow" marker-end="url(#arrow)"/>
+  <path d="M 620 410 L 678 318" class="arrow" marker-end="url(#arrow)"/>
+  <path d="M 620 410 L 678 383" class="arrow" marker-end="url(#arrow)"/>
+
+</svg>
