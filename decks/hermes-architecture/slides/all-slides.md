@@ -9,39 +9,39 @@
 <div class="flow-chart">
 
 <div class="flow-row">
-  <div class="flow-node simple"><span class="node-label">👤 User</span></div>
+ <div class="flow-node simple"><span class="node-label"> User</span></div>
 </div>
 <div class="flow-arrow"></div>
 <div class="flow-row">
-  <div class="flow-node tooling"><span class="node-label">📡 Channel</span><span class="node-sub">Discord gateway</span></div>
+ <div class="flow-node tooling"><span class="node-label"> Channel</span><span class="node-sub">Discord gateway</span></div>
 </div>
 <div class="flow-arrow"></div>
 
 <div class="flow-group">
-  <span class="flow-group-label">Long-term Organs — configured once, survive every brain swap</span>
+ <span class="flow-group-label">Long-term Organs — configured once, survive every brain swap</span>
 <div class="flow-row">
-  <div class="flow-node long-term"><span class="node-label">🧠 Brain</span><span class="node-sub">config</span></div>
-  <div class="flow-arrow right"></div>
-  <div class="flow-node long-term"><span class="node-label">👻 Soul</span><span class="node-sub">soul.md</span></div>
-  <div class="flow-arrow right"></div>
-  <div class="flow-node long-term"><span class="node-label">💾 Memory</span><span class="node-sub">memory + user</span></div>
-  <div class="flow-arrow right"></div>
-  <div class="flow-node long-term"><span class="node-label">📖 Manual</span><span class="node-sub">skill.md</span></div>
+ <div class="flow-node long-term"><span class="node-label"> Brain</span><span class="node-sub">config</span></div>
+ <div class="flow-arrow right"></div>
+ <div class="flow-node long-term"><span class="node-label"> Soul</span><span class="node-sub">soul.md</span></div>
+ <div class="flow-arrow right"></div>
+ <div class="flow-node long-term"><span class="node-label"> Memory</span><span class="node-sub">memory + user</span></div>
+ <div class="flow-arrow right"></div>
+ <div class="flow-node long-term"><span class="node-label"> Manual</span><span class="node-sub">skill.md</span></div>
 </div>
 </div>
 
 <div class="flow-arrow"></div>
 <div class="flow-row">
-  <div class="flow-node tooling"><span class="node-label">🛠 Hands</span><span class="node-sub">20+ tools</span></div>
+ <div class="flow-node tooling"><span class="node-label"> Hands</span><span class="node-sub">20+ tools</span></div>
 </div>
 <div class="flow-arrow"></div>
 <div class="flow-row">
-  <div class="flow-node simple"><span class="node-label">👤 User</span></div>
+ <div class="flow-node simple"><span class="node-label"> User</span></div>
 </div>
 
 <div class="flow-arrow"></div>
 <div class="flow-row">
-  <div class="flow-node compute"><span class="node-label">⏰ Alarm</span><span class="node-sub">cron auto-wakes Brain</span></div>
+ <div class="flow-node compute"><span class="node-label">⏰ Alarm</span><span class="node-sub">cron auto-wakes Brain</span></div>
 </div>
 
 </div>
@@ -50,7 +50,7 @@
 
 ---
 
-# 🧠 Brain in Production
+# Brain in Production
 
 <p>Our <code>config</code> pins down the AI model and the operational parameters. The Brain is the only piece we hot-swap; everything else below it stays put.</p>
 
@@ -59,27 +59,27 @@ model: deepseek-chat
 temperature: 0.3
 max_tokens: 4096
 fallback_chain:
-  - claude-sonnet-4.5
-  - gpt-5
-  - gemini-2.5-pro
+ - claude-sonnet-4.5
+ - gpt-5
+ - gemini-2.5-pro
 
 # swap history (last 6 months)
 - 2026-01 .. 2026-04 → claude-sonnet-4.5
 - 2026-05 .. 2026-06 → gpt-5
-- 2026-07 .. now    → deepseek-chat  (cost + latency)</code></pre>
+- 2026-07 .. now → deepseek-chat (cost + latency)</code></pre>
 
 <p>The fallback chain is the part that matters: when the primary model degrades or is unavailable, the Brain rolls over without losing <strong>Memory</strong>, <strong>Soul</strong>, or <strong>Manual</strong>.</p>
 
 ---
 
-# 👻 Soul in Production
+# Soul in Production
 
 <p>The persona lives in <code>soul.md</code>. It's not the system prompt — those change with the Brain. The Soul is what stays.</p>
 
 <pre><code># soul.md — persona and rules of engagement
 
 ## identity
-- name: 채니봇 (Chani)
+- name: the assistant
 - role: investment analyst + systems engineer
 - voice: precise, calm, occasionally dry
 - language: Korean default, English when source is English
@@ -94,19 +94,19 @@ fallback_chain:
 - when the data is ambiguous, surface the ambiguity
 - when the user hasn't asked, don't volunteer</code></pre>
 
-<p>The Soul has been edited seven times in the last quarter. Each edit is a small behavioural calibration, not a rewrite. The audit trail lives in <code>hermes-logs</code>.</p>
+<p>The Soul has been edited seven times in the last quarter. Each edit is a small behavioural calibration, not a rewrite. The audit trail lives in <code>project-h</code>.</p>
 
 ---
 
-# 💾 Memory in Production
+# Memory in Production
 
 <p>Two layers, both actively used.</p>
 
 <div class="flow-chart">
 <div class="flow-row">
-<div class="flow-node data"><span class="node-label">📓 Notebook</span><span class="node-sub">memory.md + user.md</span><span class="node-sub">2KB · always loaded</span></div>
+<div class="flow-node data"><span class="node-label"> Notebook</span><span class="node-sub">memory.md + user.md</span><span class="node-sub">2KB · always loaded</span></div>
 <div class="flow-arrow right"></div>
-<div class="flow-node data"><span class="node-label">🗄 Vector store</span><span class="node-sub">Honcho / pgvector</span><span class="node-sub">unlimited · on demand</span></div>
+<div class="flow-node data"><span class="node-label"> Vector store</span><span class="node-sub">Honcho / pgvector</span><span class="node-sub">unlimited · on demand</span></div>
 </div>
 </div>
 
@@ -122,7 +122,7 @@ fallback_chain:
 
 ---
 
-# 📖 Manual in Production
+# Manual in Production
 
 <p><code>skill.md</code> is the engine of compounding. Every successful workflow writes a procedure here; the next time, the procedure is read instead of rediscovered.</p>
 
@@ -156,7 +156,7 @@ fallback_chain:
 
 ---
 
-# 🛠 Hands in Production
+# Hands in Production
 
 <p>Four tool families, each used daily.</p>
 
@@ -186,7 +186,7 @@ fallback_chain:
 
 ---
 
-# 📡 Channel in Production
+# Channel in Production
 
 <p>The Discord gateway is the front door. One bot, one user, three active channels.</p>
 
@@ -226,10 +226,10 @@ fallback_chain:
 <p>Each job triggers the Brain with a fresh context, runs the chain, and reports back. The Brain doesn't sit idle waiting — it gets woken, works, reports, and goes back to sleep.</p>
 
 <pre><code># /etc/cron.d/hermes
-30 20 * * 1-5  hermes-agent run briefing_macro.py
-35 20 * * 1-5  hermes-agent run langgraph_pipeline.py
-0 23 * * 1-5  hermes-agent run backup_housekeeping.py
-0 4  * * 1-5  bash /home/hermes/scripts/wiki_sync.sh</code></pre>
+30 20 * * 1-5 hermes-agent run briefing_macro.py
+35 20 * * 1-5 hermes-agent run langgraph_pipeline.py
+0 23 * * 1-5 hermes-agent run backup_housekeeping.py
+0 4 * * 1-5 bash /home/hermes/scripts/wiki_sync.sh</code></pre>
 
 ---
 
@@ -282,13 +282,13 @@ fallback_chain:
 
 ---
 
-# 🗂 Wiki SSoT in Practice
+# Wiki SSoT in Practice
 
-<p><code>hermes-wiki</code> is the single source of truth. <code>INDEX.md</code> is the entry point. Every page has <code>related:</code> frontmatter that the Brain follows to walk the graph.</p>
+<p><code>project-i</code> is the single source of truth. <code>INDEX.md</code> is the entry point. Every page has <code>related:</code> frontmatter that the Brain follows to walk the graph.</p>
 
 <div class="flow-chart">
 <div class="flow-row">
-<div class="flow-node long-term"><span class="node-label">📚 hermes-wiki</span><span class="node-sub">SSoT index</span></div>
+<div class="flow-node long-term"><span class="node-label"> project-i</span><span class="node-sub">SSoT index</span></div>
 </div>
 <div class="flow-arrow"></div>
 
@@ -335,24 +335,160 @@ fallback_chain:
 
 ---
 
-# 🔗 Links
+# Links
 
 <div class="card">
 
 **Live deck**
-`https://mybotagent.github.io/hermes-architecture-deck/decks/hermes-architecture/`
+`https://org-a.example.io/project-a/decks/hermes-architecture/`
 
 **Source**
-- [mybotagent/hermes-wiki](https://github.com/mybotagent/hermes-wiki) — SSoT
-- [mybotagent/hermes-wiki-super](https://github.com/mybotagent/hermes-wiki-super) — all submodules
-- [mybotagent/hermes-logs](https://github.com/mybotagent/hermes-logs) — change history
+- [org-a/project-i](https://github.com/org-a/project-i) — SSoT
+- [org-a/project-b](https://github.com/org-a/project-b) — all submodules
+- [org-a/project-h](https://github.com/org-a/project-h) — change history
 
 **Pipeline**
-- [mybotagent/trade-pipeline](https://github.com/mybotagent/trade-pipeline) — LangGraph + cron code
+- [org-a/project-j](https://github.com/org-a/project-j) — LangGraph + cron code
 
 **This portfolio**
-- [mybotagent/hermes-architecture-deck](https://github.com/mybotagent/hermes-architecture-deck) — repo + Pages
+- [org-a/project-a](https://github.com/org-a/project-a) — repo + Pages
 
 </div>
 
-<div class="small">🤖 Generated by Hermes Agent · July 2026 · Apple-inspired white-mode design</div>
+<div class="small"> Generated by Hermes Agent · July 2026 · Apple-inspired white-mode design</div>
+
+
+---
+
+# How We Apply Karpathy's LLM Wiki Method
+
+<p>The LLM Wiki pattern defines five layers, each with a single discipline. We use it as a containment boundary: every page belongs to exactly one layer, and the rules per layer are unambiguous.</p>
+
+<table>
+<thead>
+<tr><th>Layer</th><th>Discipline</th><th>Our state today</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>raw/</strong></td><td>Immutable source files. Never edited after ingest.</td><td>Folder exists. Empty. Reserved for research sources.</td></tr>
+<tr><td><strong>research/</strong></td><td>Typed pages: entity, concept, comparison. Strict frontmatter.</td><td>Folder exists. Empty. Typed ingest not started.</td></tr>
+<tr><td><strong>operational/</strong></td><td>Free-form. Largest layer. Domain knowledge in plain markdown.</td><td>Populated. Eight sub-domains: architecture, analysis, code, infra, watchlist, repos, people, solopreneur.</td></tr>
+<tr><td><strong>logs/</strong></td><td>Timestamped change records. Append-only.</td><td>Submodule. Files named YYYY-MM-DD-HHMM.md.</td></tr>
+<tr><td><strong>schema/</strong></td><td>Rules. The system definition for everything else.</td><td>Two files: AGENTS.md (the contract), SCHEMA.md (the taxonomy and lint).</td></tr>
+</tbody>
+</table>
+
+<p>Three of five layers carry real weight today. The two empty layers are not unfinished business — they are reserved slots. The system knows what goes there; nothing has qualified for ingest yet.</p>
+
+<div class="card">
+
+**What the pattern buys us**
+
+- <strong>No silent drift</strong> — every page declares its layer, and the layer declares its discipline.
+- <strong>Predictable retrieval</strong> — when answering a question, we know which layer to walk.
+- <strong>Front-loaded rigor</strong> — typed pages cost more to write, so we reserve them for things worth the cost.
+
+</div>
+
+---
+
+# Our GitHub Structure Design
+
+<p>The knowledge surface is split across multiple repos. The split is driven by access pattern, not by topic.</p>
+
+<pre>
+org-a
+├── project-a       (public — Pages portfolio + slide deck)
+├── project-b       (public — super-repo, aggregates all knowledge)
+│   ├── submodule i (operational wiki + INDEX)
+│   ├── submodule c (assistant-A CLI knowledge)
+│   ├── submodule d (assistant-B CLI knowledge)
+│   ├── submodule e (schedule knowledge)
+│   ├── submodule f (portfolio knowledge)
+│   ├── submodule g (command catalog)
+│   └── submodule h (change logs)
+└── project-j       (public — pipeline code + cron runners)
+</pre>
+
+<p>One <code>git clone --recursive</code> gives the entire knowledge surface. Each submodule owns exactly one domain. The super-repo is a thin aggregator — it adds no content of its own, only pointers.</p>
+
+<h3>Branch and merge rules</h3>
+
+<ul>
+<li><strong>main</strong> — stable. Every commit here is either deployed (Pages) or live in production (cron).</li>
+<li><strong>feature/*</strong> — short-lived. Squash-merged into main. No long-lived branches.</li>
+<li><strong>No develop</strong> — we ship from main. Rollback is a revert commit.</li>
+</ul>
+
+<h3>Frontmatter discipline</h3>
+
+<p>Operational pages carry a small set of optional frontmatter fields:</p>
+
+<pre><code>---
+tags: ["hermes", "architecture", "memory"]
+related: ["analysis/langgraph-pipeline.md"]
+created: 2026-06-08
+---</pre>
+
+<p>The <code>related:</code> field is the most-used one. The Brain walks it to navigate the wiki graph.</p>
+
+<h3>Cache busting on Pages</h3>
+
+<p>Static sites on Pages cache aggressively. Every asset URL carries a version suffix, and the served HTML carries <code>Cache-Control: no-cache</code> headers. Without this, we measured roughly 40% of pushes reaching users as stale content.</p>
+
+---
+
+# GraphRAG for Search
+
+<p>Plain keyword search isn't enough. The wiki is a graph, not a flat document collection, so we search it like a graph.</p>
+
+<h3>The two stores</h3>
+
+<ul>
+<li><strong>Vector store (Postgres + pgvector)</strong> — semantic search. Query becomes an embedding, embedding becomes top-k similar pages.</li>
+<li><strong>Graph store (Neo4j)</strong> — entity-relationship. Query extracts entities, then walks the graph from those entities along the relationships we declared in frontmatter.</li>
+</ul>
+
+<p>The two are not redundant. Each one answers a different shape of question.</p>
+
+<h3>How a question becomes an answer</h3>
+
+<ol>
+<li><strong>Vector pass</strong> — embed the question, return the top eight pages by cosine similarity. This is the recall layer.</li>
+<li><strong>Entity extraction</strong> — light LLM call extracts candidate entities from the question (ticker names, module names, people, dates).</li>
+<li><strong>Graph walk</strong> — for each extracted entity, pull the neighborhood (1-hop) from the graph: pages, related pages, recent log entries.</li>
+<li><strong>Re-rank</strong> — merge the two result sets. Pages that appear in both ranks higher. Pages whose <code>created</code> date is more recent rank higher when relevance ties.</li>
+<li><strong>Context build</strong> — assemble the top pages into a context window the Brain can read directly. No copy-paste, no manual search.</li>
+</ol>
+
+<h3>What each store is good at</h3>
+
+<table>
+<thead>
+<tr><th>Question shape</th><th>Best store</th><th>Why</th></tr>
+</thead>
+<tbody>
+<tr><td>"Show me pages similar to Y"</td><td>Vector</td><td>Semantic similarity is the whole point.</td></tr>
+<tr><td>"What depends on X?"</td><td>Graph</td><td>Pure relationship traversal.</td></tr>
+<tr><td>"Why did we change our mind about Z?"</td><td>Graph + Logs</td><td>Graph finds the related pages; logs find the commit trail.</td></tr>
+<tr><td>"What's adjacent to W?"</td><td>Hybrid</td><td>Vector surfaces the topic, graph extends the neighborhood.</td></tr>
+<tr><td>"What did we know about V six months ago?"</td><td>Graph + Logs (time-filtered)</td><td>Logs are timestamped, so the filter is a date range.</td></tr>
+</tbody>
+</table>
+
+<h3>What we deliberately do not do</h3>
+
+<ul>
+<li><strong>No reranker model</strong> — the cosine + graph rerank is good enough. Adding a cross-encoder would buy maybe five percent precision at the cost of a hundred milliseconds per query.</li>
+<li><strong>No query rewriting</strong> — the Brain already rewrites the question when it formulates it. Doing it again in the retrieval layer would just amplify the first rewrite's bias.</li>
+<li><strong>No real-time indexing</strong> — pages get embedded at write time, not at read time. A read is always cache-served.</li>
+</ul>
+
+<div class="card">
+
+**Why GraphRAG over plain RAG**
+
+Plain RAG retrieves documents. GraphRAG retrieves <em>relations</em>. The wiki isn't a knowledge base — it's a record of how the system's thinking has evolved over time. The relations <em>are</em> the knowledge.
+
+</div>
+
+---
