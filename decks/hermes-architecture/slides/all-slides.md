@@ -1,4 +1,4 @@
-# How We Run It
+# Hermes in Production
 
 ---
 
@@ -154,56 +154,6 @@ fallback_chain:
 </table>
 
 <h3>The rule</h3>
-
-<p>Whoever has the most relevant context for the next sentence takes it. No bot speaks for the sake of speaking. Silence is allowed — and preferred — when the orchestrator can answer alone.</p>
-
 ---
 
-# Linear + Hermes Kanban
-<h3>The topology</h3>
-
-<p><img src="../../assets/img/linear-kanban-sync.svg" alt="Linear ↔ Hermes Kanban bidirectional webhook sync — issue / status / comment events in both directions, field-level conflict resolution" style="max-width:100%;height:auto;"></p>
-
-<h3>Why two systems</h3>
-
-<ul>
-<li><strong>Linear</strong> — shared with collaborators, public to the team, lives at org-a. The canonical ticket.</li>
-<li><strong>Hermes Kanban</strong> — local-first, fast to update, fits the cron rhythm, no round-trip latency.</li>
-<li><strong>Each side reflects what the other side did.</strong> We never have to ask "which is up to date" because both are.</li>
-</ul>
-
-<h3>What triggers a sync</h3>
-
-<table>
-<thead>
-<tr><th>Direction</th><th>Trigger</th><th>Field-level conflict resolution</th></tr>
-</thead>
-<tbody>
-<tr><td>Linear → Kanban</td><td>issue created, status changed, comment added</td><td>Linear wins</td></tr>
-<tr><td>Kanban → Linear</td><td>card moved, comment added, card closed</td><td>Linear wins on ties</td></tr>
-</tbody>
-</table>
-
-<h3>The mapping file</h3>
-
-<p>The webhook endpoints and field mappings live in a single config file, kept under version control:</p>
-
-<pre><code># config/kanban_linear_mapping.json
-{
-  "linear_workspace": "org-a",
-  "kanban_board_id": "kanban-main",
-  "field_map": {
-    "linear.status": "kanban.column",
-    "linear.assignee": "kanban.owner",
-    "linear.priority": "kanban.priority"
-  },
-  "webhook_secret_env": "LINEAR_WEBHOOK_SECRET"
-}</code></pre>
-
-<h3>Failure mode</h3>
-
-<p>If the webhook is down for more than ten minutes, the cron nightly reconciliation re-syncs both sides from the union of last-known states. We never lose a card to a missed webhook — we may lose five minutes of latency.</p>
-
----
-
-</div>
+# Discord Three-Way Meeting
