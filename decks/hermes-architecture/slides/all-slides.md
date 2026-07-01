@@ -207,21 +207,7 @@ monthly review → past calls analysed → prompts refined
 
 <h3>The flow</h3>
 
-<pre><code>User → Discord thread
-        │
-        ▼
-       Hermes (orchestrator)
-        │
-        ├── if code touches &gt;200 lines     ──► Claude Bot A
-        ├── if claim needs evidence          ──► Claude Bot B
-        ├── if both at once                  ──► parallel, then merge
-        └── otherwise                        ──► Hermes alone
-        │
-        ▼
-   synthesize
-        │
-        ▼
-   User (one merged reply, not three)</code></pre>
+<p><img src="../../assets/img/discord-three-way.svg" alt="Discord three-way meeting — User → Discord thread → Hermes orchestrator → dispatch to Claude Bot A (Plannerbot) and Claude Bot B (Verifierbot) → Synthesize → User" style="max-width:100%;height:auto;"></p>
 
 <h3>When each bot speaks</h3>
 
@@ -248,15 +234,7 @@ monthly review → past calls analysed → prompts refined
 
 <h3>The topology</h3>
 
-<pre><code>Linear (source of truth, shared with team)
-   │
-   │ webhook on issue / status / comment
-   ▼
-Hermes Kanban (local mirror, local-first)
-   │
-   │ webhook on card move / comment / close
-   ▼
-Linear (reconciled)</code></pre>
+<p><img src="../../assets/img/linear-kanban-sync.svg" alt="Linear ↔ Hermes Kanban bidirectional webhook sync — issue / status / comment events in both directions, field-level conflict resolution" style="max-width:100%;height:auto;"></p>
 
 <h3>Why two systems</h3>
 

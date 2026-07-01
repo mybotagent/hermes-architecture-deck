@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif">
+  <defs>
+    <marker id="arrow-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0066cc"/>
+    </marker>
+    <marker id="arrow-l" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0066cc"/>
+    </marker>
+  </defs>
+
+  <!-- Linear (left) -->
+  <rect x="40" y="100" width="240" height="160" rx="16" fill="#ffffff" stroke="#0066cc" stroke-width="2"/>
+  <text x="160" y="135" text-anchor="middle" font-size="20" font-weight="600" fill="#0066cc">Linear</text>
+  <text x="160" y="160" text-anchor="middle" font-size="14" fill="#1d1d1f">source of truth</text>
+  <text x="160" y="182" text-anchor="middle" font-size="12" fill="#86868b">team-shared · public</text>
+  <text x="160" y="200" text-anchor="middle" font-size="12" fill="#86868b">issues · status · comments</text>
+  <text x="160" y="232" text-anchor="middle" font-size="11" fill="#86868b" font-style="italic">canonical tickets</text>
+
+  <!-- Right arrow (Linear → Kanban) -->
+  <line x1="290" y1="150" x2="510" y2="150" stroke="#0066cc" stroke-width="2.5" marker-end="url(#arrow-r)"/>
+  <text x="400" y="140" text-anchor="middle" font-size="12" font-weight="500" fill="#0066cc">webhook</text>
+  <text x="400" y="170" text-anchor="middle" font-size="10" fill="#86868b">on issue / status / comment</text>
+
+  <!-- Hermes Kanban (right) -->
+  <rect x="520" y="100" width="240" height="160" rx="16" fill="#ffffff" stroke="#0066cc" stroke-width="2"/>
+  <text x="640" y="135" text-anchor="middle" font-size="20" font-weight="600" fill="#0066cc">Hermes Kanban</text>
+  <text x="160" y="0" text-anchor="middle" font-size="14"></text>
+  <text x="640" y="160" text-anchor="middle" font-size="14" fill="#1d1d1f">local mirror</text>
+  <text x="640" y="182" text-anchor="middle" font-size="12" fill="#86868b">local-first · fast</text>
+  <text x="640" y="200" text-anchor="middle" font-size="12" fill="#86868b">cards · moves · closes</text>
+  <text x="640" y="232" text-anchor="middle" font-size="11" fill="#86868b" font-style="italic">cron-rhythm friendly</text>
+
+  <!-- Left arrow (Kanban → Linear) -->
+  <line x1="510" y1="220" x2="290" y2="220" stroke="#0066cc" stroke-width="2.5" marker-end="url(#arrow-l)"/>
+  <text x="400" y="210" text-anchor="middle" font-size="12" font-weight="500" fill="#0066cc">webhook</text>
+  <text x="400" y="240" text-anchor="middle" font-size="10" fill="#86868b">on card move / comment / close</text>
+
+  <!-- Conflict resolution note -->
+  <rect x="100" y="290" width="600" height="50" rx="10" fill="#f5f5f7" stroke="#d2d2d7" stroke-width="1"/>
+  <text x="400" y="310" text-anchor="middle" font-size="13" font-weight="600" fill="#1d1d1f">Conflict resolution</text>
+  <text x="400" y="328" text-anchor="middle" font-size="12" fill="#86868b">Linear wins on field-level ties · last-write</text>
+</svg>
