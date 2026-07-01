@@ -8,14 +8,14 @@
 
 ```mermaid
 flowchart LR
-    input["입력 데이터<br/>(context, scores, metrics)"] --> ctx["1. Context<br/>환경 분석"]
-    ctx --> pos["2. Positive<br/>강세 논거"]
-    ctx --> neg["3. Negative<br/>약세 논거"]
-    pos --> risk["4. Risk<br/>하락 시나리오"]
+    input["입력 데이터<br>(context, scores, metrics)"] --> ctx["1. Context<br>환경 분석"]
+    ctx --> pos["2. Positive<br>강세 논거"]
+    ctx --> neg["3. Negative<br>약세 논거"]
+    pos --> risk["4. Risk<br>하락 시나리오"]
     neg --> risk
-    neg --> trade["5. Trade-off<br/>상충 트레이드오프"]
+    neg --> trade["5. Trade-off<br>상충 트레이드오프"]
     pos --> trade
-    risk --> concl["6. Conclusion<br/>최종 결정"]
+    risk --> concl["6. Conclusion<br>최종 결정"]
     trade --> concl
 
     ctx -.맥락 제공.-> concl

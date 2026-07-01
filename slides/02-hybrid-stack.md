@@ -20,15 +20,15 @@
 ```mermaid
 flowchart TD
     q1{"데이터 민감도?"}
-    q2{"실시간 응답<br/>필요?"}
+    q2{"실시간 응답<br>필요?"}
     q3{"대규모 분석?"}
 
-    q1 -->|High| local["💻 Ollama 로컬<br/>+ Hermes"]
+    q1 -->|High| local["💻 Ollama 로컬<br>+ Hermes"]
     q1 -->|Low| q2
-    q2 -->|Yes| codex["💻 Codex<br/>(Cursor)"]
+    q2 -->|Yes| codex["💻 Codex<br>(Cursor)"]
     q2 -->|No| q3
     q3 -->|Yes| claude["☁️ Claude Sonnet"]
-    q3 -->|No| google["☁️ Google Gemini<br/>+ Notion"]
+    q3 -->|No| google["☁️ Google Gemini<br>+ Notion"]
 
     style local fill:#3a5c1a,stroke:#ffd93d,stroke-width:2px
     style codex fill:#1a3a5c,stroke:#00d4ff,stroke-width:2px
@@ -64,8 +64,8 @@ flowchart TD
 ```mermaid
 flowchart LR
     src["뉴스 원문"] -->|"스크랩"| hermes["Hermes"]
-    hermes -->|"3줄 요약<br/>+ 태깅"| ollama["Ollama<br/>(로컬 LLM)"]
-    ollama -->|"정형 데이터만"| obsidian["Obsidian<br/>(영구 저장)"]
+    hermes -->|"3줄 요약<br>+ 태깅"| ollama["Ollama<br>(로컬 LLM)"]
+    ollama -->|"정형 데이터만"| obsidian["Obsidian<br>(영구 저장)"]
     src -.폐기.-> raw["❌ 원문 버림"]
 
     style hermes fill:#1a3a5c,stroke:#00d4ff

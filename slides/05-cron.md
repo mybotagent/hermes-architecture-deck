@@ -54,12 +54,12 @@ gantt
 flowchart LR
     run["Cron 실행"] --> q1{"404 발생?"}
     q1 -->|No| ok["✅ 정상"]
-    q1 -->|Yes| q2["위험 패턴<br/>매칭?"]
+    q1 -->|Yes| q2["위험 패턴<br>매칭?"]
     q2 -->|No| ok
-    q2 -->|Yes| count["카운트 증가<br/>(.heal_404_retries.json)"]
+    q2 -->|Yes| count["카운트 증가<br>(.heal_404_retries.json)"]
     count --> q3{"≥ 3?"}
     q3 -->|No| run
-    q3 -->|Yes| fix["🔧 자동 fix<br/>jobs.json patch<br/>+ .bak 백업"]
+    q3 -->|Yes| fix["🔧 자동 fix<br>jobs.json patch<br>+ .bak 백업"]
     fix --> alert["📱 Discord 알림"]
 
     style fix fill:#3a5c1a,stroke:#ffd93d,stroke-width:3px

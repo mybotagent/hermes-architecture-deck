@@ -8,12 +8,12 @@
 
 ```mermaid
 flowchart TB
-    ssot["SSoT<br/>단일 진실 공급원"]
+    ssot["SSoT<br>단일 진실 공급원"]
 
-    ssot --> c1["Centralization<br/>분산 데이터를 단일 플랫폼에 통합"]
-    ssot --> c2["Consistency<br/>수정이 전체에 동시 반영"]
-    ssot --> c3["Integrity<br/>언제든 동일한 기준으로 접근"]
-    ssot --> c4["Accurate Decision<br/>의사결정 속도·정확도 동시 상승"]
+    ssot --> c1["Centralization<br>분산 데이터를 단일 플랫폼에 통합"]
+    ssot --> c2["Consistency<br>수정이 전체에 동시 반영"]
+    ssot --> c3["Integrity<br>언제든 동일한 기준으로 접근"]
+    ssot --> c4["Accurate Decision<br>의사결정 속도·정확도 동시 상승"]
 
     style ssot fill:#5c1a5c,stroke:#a855f7,stroke-width:4px
     style c1 fill:#1a3a5c,stroke:#00d4ff
@@ -47,15 +47,15 @@ flowchart TB
 
 ```mermaid
 graph TD
-    super["hermes-wiki-super<br/>(super repo)"]
+    super["hermes-wiki-super<br>(super repo)"]
 
-    super --> w1["hermes-wiki<br/>(Index + 운영)"]
+    super --> w1["hermes-wiki<br>(Index + 운영)"]
     super --> w2["hermes-wiki-claude-code"]
     super --> w3["hermes-wiki-codex"]
     super --> w4["hermes-wiki-schedule"]
     super --> w5["hermes-wiki-portfolio"]
     super --> w6["hermes-slash-commands"]
-    super --> w7["hermes-logs<br/>(변경 이력)"]
+    super --> w7["hermes-logs<br>(변경 이력)"]
 
     w1 --> a1["architecture/"]
     w1 --> a2["analysis/"]

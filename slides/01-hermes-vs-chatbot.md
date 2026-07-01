@@ -28,19 +28,19 @@
 ```mermaid
 flowchart TB
     subgraph longterm["장기 - Long-term"]
-        brain["두뇌<br/>config"]
-        soul["인격<br/>soul.md"]
-        memory["기억<br/>memory + user"]
-        skill["업무 매뉴얼<br/>skill.md"]
+        brain["두뇌<br>config"]
+        soul["인격<br>soul.md"]
+        memory["기억<br>memory + user"]
+        skill["업무 매뉴얼<br>skill.md"]
     end
 
     subgraph tools3["직원화 장치"]
-        hands["손발<br/>tools"]
-        channel["채널<br/>20+ gateway"]
-        alarm["알람<br/>cron"]
+        hands["손발<br>tools"]
+        channel["채널<br>20+ gateway"]
+        alarm["알람<br>cron"]
     end
 
-    user((사용자)) --> channel
+    user((User)) --> channel
     channel --> brain
     brain --> soul
     soul --> memory
@@ -69,8 +69,8 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    work["대화/작업"] --> core["수첩<br/>memory.md<br/>(상시 로드, 2KB)"]
-    work --> vector["벡터 DB<br/>(필요시 검색)"]
+    work["대화/작업"] --> core["수첩<br>memory.md<br>(상시 로드, 2KB)"]
+    work --> vector["벡터 DB<br>(필요시 검색)"]
 
     core -->|"핵심만 유지"| next["다음 세션"]
     vector -->|"필요한 것만 꺼냄"| next
@@ -97,9 +97,9 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    trial["첫 실행<br/>시행착오"] --> success["성공"]
-    success --> manual["skill.md<br/>자동 기록"]
-    manual --> fast["재실행<br/>매뉴얼 참조"]
+    trial["첫 실행<br>시행착오"] --> success["성공"]
+    success --> manual["skill.md<br>자동 기록"]
+    manual --> fast["재실행<br>매뉴얼 참조"]
     fast --> speed["빠름"]
     speed --> experience["더 많은 경험"]
     experience --> manual

@@ -41,15 +41,15 @@ gantt
 
 ```mermaid
 flowchart LR
-    cron["cron 출력<br/>(수집된 데이터)"] --> cap["capture.py<br/>→ snapshot.json"]
-    cap --> filt["filter.py<br/>임계값 필터<br/>→ filtered_topN.json"]
-    filt --> chain["main.py<br/>멀티에이전트 체인<br/>(LLM N calls)"]
-    chain --> log["logs/analysis/<br/>YYYYMMDD_HHMM.json"]
-    log --> rpt["report.py<br/>분할 리포트"]
+    cron["cron 출력<br>(수집된 데이터)"] --> cap["capture.py<br>→ snapshot.json"]
+    cap --> filt["filter.py<br>임계값 필터<br>→ filtered_topN.json"]
+    filt --> chain["main.py<br>멀티에이전트 체인<br>(LLM N calls)"]
+    chain --> log["logs/analysis/<br>YYYYMMDD_HHMM.json"]
+    log --> rpt["report.py<br>분할 리포트"]
     rpt --> notify["📱 알림 채널"]
 
-    log --> alloc["allocator.py<br/>(1 call)"]
-    alloc --> store["📊 current.json<br/>+ 일별 스냅샷"]
+    log --> alloc["allocator.py<br>(1 call)"]
+    alloc --> store["📊 current.json<br>+ 일별 스냅샷"]
 
     style chain fill:#1a3a5c,stroke:#00d4ff,stroke-width:3px
     style notify fill:#5c1a3a,stroke:#ff6b9d

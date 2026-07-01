@@ -96,10 +96,19 @@
       gantt: { useMaxWidth: true }
     });
 
+    // 화면에 에러 표시 헬퍼
+    const showError = (msg, container) => {
+      const err = document.createElement('div');
+      err.style.cssText = 'background:#5c1a1a;border:2px solid #ff4444;color:#ffaaaa;padding:0.8em;border-radius:6px;margin:0.5em 0;font-size:0.5em;font-family:monospace;';
+      err.innerHTML = '⚠️ <strong>Mermaid Error</strong><br><pre style="white-space:pre-wrap;margin:0.4em 0 0 0;">' + msg.replace(/</g,'&lt;') + '</pre>';
+      if (container) container.replaceWith(err);
+    };
+
     // Reveal ready 후 ```mermaid 블록을 mermaid로 렌더
     const renderMermaid = async () => {
-      // markdown plugin이 변환한 <pre><code class="language-mermaid"> 찾기
-      const codes = document.querySelectorAll('.reveal pre code.language-mermaid');
+      const codes = document.querySelectorAll('.reveal pre code.language-mermaid, .reveal pre code.lang-mermaid');
+      if (codes.length === 0) return;
+      const divs = [];
       for (let i = 0; i < codes.length; i++) {
         const code = codes[i];
         const pre = code.parentElement;
@@ -108,17 +117,26 @@
         div.className = 'mermaid';
         div.textContent = source;
         div.id = `mermaid-graph-${i}`;
-        pre.replaceWith(div);
+        divs.push({ div, pre });
       }
       try {
+        // div를 한 번에 DOM에 삽입 후 mermaid 실행
+        divs.forEach(({ div, pre }) => pre.replaceWith(div));
         await mermaid.run({ querySelector: '.mermaid' });
       } catch (err) {
         console.error('Mermaid render error:', err);
+        const msg = (err && err.message) ? err.message : String(err);
+        // 실패한 그래프를 화면에 에러로 표시
+        document.querySelectorAll('.mermaid').forEach((d) => {
+          if (!d.querySelector('svg')) {
+            d.innerHTML = '<div style="background:#5c1a1a;border:2px solid #ff4444;color:#ffaaaa;padding:0.8em;border-radius:6px;font-size:0.55em;font-family:monospace;">⚠️ <strong>Mermaid parse error</strong><br><pre style="white-space:pre-wrap;margin:0.4em 0 0 0;">' + msg.replace(/</g,'&lt;') + '</pre></div>';
+          }
+        });
       }
     };
 
-    Reveal.on('ready', renderMermaid);
-    Reveal.on('slidechanged', renderMermaid);
+    Reveal.on('ready', () => setTimeout(renderMermaid, 1500));
+    Reveal.on('slidechanged', () => setTimeout(renderMermaid, 500));
 
     Reveal.initialize({
       hash: true,
