@@ -1,79 +1,112 @@
-# ⚡ Hermes Architecture Deck
+# Portfolio — YuRi
 
-> Hermes 시스템 아키텍처를 mermaid 다이어그램과 함께 풀어내는 슬라이드 덱
+> A portfolio of self-hosted technical decks, powered by Reveal.js and published through GitHub Pages.
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://mybotagent.github.io/hermes-architecture-deck/)
 [![Reveal.js](https://img.shields.io/badge/Reveal.js-5.1-blue)](https://revealjs.com/)
-[![mermaid](https://img.shields.io/badge/mermaid-10.9-ff3670)](https://mermaid.js.org/)
+[![Design](https://img.shields.io/badge/Design-Apple%20inspired-000000)](https://www.apple.com)
 
-## 🎯 무엇인가?
+## 🎯 What this is
 
-위키(`mybotagent/hermes-wiki`)의 architecture/ + analysis/ + infra/ 페이지를 슬라이드로 변환한 결과물입니다.
+A multi-deck portfolio for technical presentation work. Each deck lives in its own folder, has its own slide source, and is independently navigable.
 
-- **28장 슬라이드** (8개 섹션)
-- **10개 mermaid 다이어그램** (flowchart, gantt, quadrantChart)
-- **키보드 네비**: ← → 슬라이드 이동, ↑↓ vertical 이동, ESC overview, F 풀스크린
+- **No build step** — static HTML, vanilla CSS, plain Markdown
+- **Keyboard-driven** — Reveal.js with `←` `→` `↑` `↓` `F` `ESC` `S`
+- **Apple-inspired** — SF Pro, dark mode, single accent color, generous whitespace
+- **GitHub Pages hosted** — push to `main`, served at `https://<owner>.github.io/<repo>/`
 
-## 🚀 빠른 시작
+## 📁 Structure
 
-### 로컬에서 보기
-
-```bash
-git clone https://github.com/mybotagent/hermes-architecture-deck.git
-cd hermes-architecture-deck
-python3 -m http.server 8000
-# → http://localhost:8000
+```
+hermes-architecture-deck/
+├── index.html              # Portfolio homepage (this entry point)
+├── decks/                  # One folder per deck
+│   └── hermes-architecture/
+│       ├── index.html      # Deck entry point
+│       ├── slides/         # Markdown slides
+│       │   ├── 00-hero.md
+│       │   ├── 01-*.md
+│       │   └── ...
+│       ├── APPLE-DESIGN.md # Design reference (Apple system)
+│       └── README.md       # Deck-specific notes
+├── assets/
+│   └── css/
+│       ├── portfolio.css   # Homepage styling
+│       └── deck.css        # Deck styling (shared)
+└── README.md               # You are here
 ```
 
-### 온라인에서 보기
+## 🚀 Adding a new deck
 
-🌐 **https://mybotagent.github.io/hermes-architecture-deck/**
+1. **Create the folder** under `decks/`
+   ```bash
+   mkdir -p decks/my-new-deck/slides
+   ```
 
-## ⌨️ 키보드 단축키
+2. **Copy the entry point** from `decks/hermes-architecture/index.html` — adjust:
+   - `<title>` and meta description
+   - The `<section data-markdown="slides/XX.md">` references
+   - Any deck-specific CSS imports
 
-| 키 | 동작 |
+3. **Write slides** as Markdown files in `decks/my-new-deck/slides/`
+   - Use `---` as horizontal slide separator
+   - Use `----` as vertical (nested) separator
+   - Available CSS classes: `.tldr`, `.flow-tree`, `.small`, `.big`, `.section-hero`
+
+4. **Add a card to the homepage** (`index.html`) under `.deck-grid`:
+   ```html
+   <a class="deck-card" href="decks/my-new-deck/">
+     <div class="deck-thumb">
+       <span class="deck-thumb-glyph">XX</span>
+       <span class="deck-thumb-label">Short tagline</span>
+     </div>
+     <div class="deck-body">
+       <p class="deck-tag">Status</p>
+       <h3 class="deck-title">Deck title</h3>
+       <p class="deck-desc">One-paragraph description.</p>
+       <span class="deck-cta">View deck</span>
+     </div>
+   </a>
+   ```
+
+5. **Push to `main`** — GitHub Pages rebuilds automatically (legacy mode).
+
+## ⌨️ Keyboard shortcuts (in any deck)
+
+| Key | Action |
 |---|---|
-| `←` `→` | 슬라이드 이동 |
-| `↑` `↓` | Vertical 슬라이드 이동 |
-| `Space` | 다음 슬라이드 |
-| `ESC` | Overview 모드 |
-| `F` | 풀스크린 |
-| `S` | 발표자 노트 |
-| `B` | 슬라이드 일시정지 (검은 화면) |
+| `←` `→` | Next / previous slide |
+| `↑` `↓` | Vertical slide |
+| `Space` | Next |
+| `ESC` | Overview |
+| `F` | Fullscreen |
+| `S` | Speaker notes |
+| `B` | Pause (black screen) |
 
-## 📚 슬라이드 구성
+## 🛠 Tech stack
 
-```
-S0  Hero (3)              — 시스템 한눈에
-S1  Hermes vs 챗봇 (4)    — 7부품 + 기억 + Skill 복리
-S2  Hybrid AI Stack (4)   — 비용제로 + 최고성능 + 무오염
-S3  Pipeline (3)          — 매일 23:30 CST 자동 분석
-S4  LangGraph (3)         — Bull/Bear/Risk → Decision
-S5  Cron Jobs (3)         — 9개 크론 + 셀프힐링
-S6  SSoT + Wiki (3)       — 단일 진실 + 7 submodule
-S7  Outro (3)             — 가치 + 다음 단계
-```
+- **[Reveal.js 5.1](https://revealjs.com/)** — slide engine (CDN)
+- **[GitHub Pages](https://pages.github.com/)** — static hosting (legacy mode)
+- **No build step** — edit and push
+- **Apple-inspired CSS** — SF Pro stack, single accent, dark canvas
 
-## 🛠 기술 스택
+## 🎨 Design system
 
-- **[Reveal.js 5.1](https://revealjs.com/)** — 슬라이드 엔진
-- **[mermaid.js 10.9](https://mermaid.js.org/)** — 다이어그램
-- **GitHub Pages** — 정적 호스팅
-- **GitHub Actions** — 자동 배포
+Each deck uses `assets/css/deck.css`, which implements an Apple-inspired dark theme:
 
-## 🔗 관련 저장소
+- **Background**: pure black (`#000000`)
+- **Primary accent**: `#2997ff` (Apple Blue on dark)
+- **Body text**: `#ffffff` with `#86868b` for muted
+- **Type**: SF Pro Display for headings, SF Pro Text for body
+- **Cards**: 22px radius, subtle shadow on hover, 0.3s ease transitions
+- **Sections**: 1px hairlines, generous padding, no decorative gradients
 
-| 저장소 | 용도 |
-|---|---|
-| [mybotagent/hermes-wiki](https://github.com/mybotagent/hermes-wiki) | 원본 콘텐츠 (Karpathy LLM Wiki) |
-| [mybotagent/hermes-wiki-super](https://github.com/mybotagent/hermes-wiki-super) | Wiki super repo (모든 submodule 통합) |
-| [mybotagent/trade-pipeline](https://github.com/mybotagent/trade-pipeline) | LangGraph 파이프라인 코드 |
+Reference the Apple design guide at `decks/hermes-architecture/APPLE-DESIGN.md` (generated via `npx getdesign@latest add apple`).
 
-## 📜 라이선스
+## 📜 License
 
-MIT License
+MIT
 
-## 🤖 빌드
+## 🤖 Credits
 
-이 슬라이드는 [Hermes Agent](https://github.com/mybotagent)로 자동 생성되었습니다.
-원본: [`DESIGN.md`](./DESIGN.md)
+Generated and maintained by Hermes Agent.

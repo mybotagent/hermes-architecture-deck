@@ -1,0 +1,270 @@
+/* ============================================
+   Deck Slides — Apple Design System (dark mode)
+   ============================================ */
+
+:root {
+  /* Apple dark mode tokens */
+  --apple-primary: #0066cc;
+  --apple-primary-focus: #0071e3;
+  --apple-primary-on-dark: #2997ff;
+  --apple-ink: #1d1d1f;
+  --apple-body-on-dark: #ffffff;
+  --apple-body-muted: #86868b;
+  --apple-canvas: #ffffff;
+  --apple-canvas-parchment: #f5f5f7;
+  --apple-surface-black: #000000;
+  --apple-divider: #d2d2d7;
+}
+
+.reveal {
+  font-family: "SF Pro Display", "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  background: var(--apple-surface-black);
+  color: var(--apple-body-on-dark);
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+  text-align: left;
+}
+
+.reveal .slides { text-align: left; }
+
+/* Apple typography hierarchy */
+.reveal h1 {
+  font-family: "SF Pro Display", system-ui, sans-serif;
+  font-size: 3.2em;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--apple-body-on-dark);
+  text-transform: none;
+}
+
+.reveal h1 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--apple-primary-on-dark);
+}
+
+.reveal h2 {
+  font-family: "SF Pro Display", system-ui, sans-serif;
+  font-size: 2em;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--apple-body-on-dark);
+  text-transform: none;
+  margin-bottom: 0.6em;
+}
+
+.reveal h3 {
+  font-family: "SF Pro Text", system-ui, sans-serif;
+  font-size: 1.3em;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--apple-primary-on-dark);
+  text-transform: none;
+}
+
+.reveal p, .reveal li {
+  font-family: "SF Pro Text", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 0.95em;
+  line-height: 1.47;
+  letter-spacing: -0.01em;
+  color: var(--apple-body-on-dark);
+}
+
+.reveal strong {
+  font-weight: 600;
+  color: var(--apple-body-on-dark);
+}
+
+.reveal em {
+  font-style: italic;
+  color: var(--apple-primary-on-dark);
+}
+
+/* Apple-style code (rounded, subtle) */
+.reveal code {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--apple-primary-on-dark);
+  padding: 0.15em 0.45em;
+  border-radius: 6px;
+  font-family: "SF Mono", ui-monospace, monospace;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.reveal pre {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.2em 1.5em;
+  width: 90%;
+  box-shadow: none;
+  font-size: 0.65em;
+  line-height: 1.5;
+}
+
+.reveal pre code {
+  background: transparent;
+  color: var(--apple-body-on-dark);
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Tables — Apple spreadsheet aesthetic */
+.reveal table {
+  font-size: 0.8em;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1em 0;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.reveal table th {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--apple-body-on-dark);
+  padding: 0.7em 1em;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85em;
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reveal table td {
+  padding: 0.6em 1em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--apple-body-on-dark);
+  font-size: 0.95em;
+}
+
+.reveal table tr:last-child td { border-bottom: none; }
+.reveal table tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+
+/* Blockquote — Apple editorial */
+.reveal blockquote {
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid var(--apple-primary-on-dark);
+  padding: 1em 1.4em;
+  font-style: italic;
+  font-size: 1.05em;
+  color: var(--apple-body-on-dark);
+  border-radius: 0 12px 12px 0;
+}
+
+/* Apple-style text flowchart (replaces mermaid) */
+.flow-tree {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.4em 1.6em;
+  margin: 1em 0;
+  font-family: "SF Mono", ui-monospace, monospace;
+  font-size: 0.6em;
+  line-height: 1.7;
+  color: var(--apple-body-on-dark);
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.flow-tree .node {
+  color: var(--apple-primary-on-dark);
+  font-weight: 600;
+}
+
+/* Section opener (large display) */
+.reveal .section-hero {
+  text-align: center;
+}
+
+.reveal .section-hero .section-num {
+  font-size: 0.9em;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--apple-body-muted);
+  font-weight: 500;
+  margin-bottom: 1em;
+  display: block;
+}
+
+.reveal .section-hero h2 {
+  font-size: 3em;
+  margin-bottom: 0.3em;
+}
+
+.reveal .section-hero p {
+  font-size: 1.15em;
+  color: var(--apple-body-muted);
+  font-weight: 300;
+}
+
+/* TL;DR card (Apple highlight box) */
+.reveal .tldr {
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.12) 0%, rgba(41, 151, 255, 0.06) 100%);
+  border: 1px solid rgba(41, 151, 255, 0.25);
+  border-radius: 18px;
+  padding: 1.4em 1.8em;
+  margin: 1.2em 0;
+}
+
+.reveal .tldr h3 {
+  margin-top: 0;
+  color: var(--apple-primary-on-dark);
+  font-weight: 600;
+}
+
+/* Slide-number badge */
+.reveal .slide-number {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--apple-body-on-dark);
+  border-radius: 980px;
+  padding: 0.35em 0.8em;
+  font-size: 0.55em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Small text */
+.reveal .small {
+  font-size: 0.6em;
+  color: var(--apple-body-muted);
+  font-weight: 300;
+  letter-spacing: 0;
+}
+
+/* Reveal progress bar (Apple blue) */
+.reveal .progress {
+  background: rgba(255, 255, 255, 0.08);
+  height: 3px;
+}
+
+.reveal .progress span {
+  background: var(--apple-primary-on-dark);
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+/* Reveal controls — minimal */
+.reveal .controls {
+  color: var(--apple-primary-on-dark);
+}
+
+.reveal .controls button {
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.reveal .controls button:hover { opacity: 1; }
+
+/* Big text accent */
+.reveal .big {
+  font-size: 1.6em;
+  color: var(--apple-primary-on-dark);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}

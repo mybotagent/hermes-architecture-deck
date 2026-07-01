@@ -1,158 +1,67 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hermes 시스템 해부 — Architecture Deck</title>
-  <meta name="description" content="Hermes Agent 시스템 아키텍처를 mermaid 다이어그램과 함께 풀어내는 슬라이드 덱">
-  <meta name="author" content="Hermes Agent">
-
-  <!-- Reveal.js 5.x (CDN) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
-  <link rel="stylesheet" href="assets/css/custom.css">
-
+  <title>Portfolio — YuRi</title>
+  <meta name="description" content="Technical presentation decks and architecture write-ups.">
+  <link rel="stylesheet" href="assets/css/portfolio.css">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-  <div class="reveal">
-    <div class="slides">
 
-      <!-- Section 0: Hero -->
-      <section data-markdown="slides/00-hero.md"
-               data-separator="^---$"
-               data-separator-vertical="^----$"
-               data-separator-notes="^Note:">
-      </section>
+  <!-- Hero -->
+  <section class="hero">
+    <p class="hero-tag">Portfolio · 2026</p>
+    <h1 class="hero-title">Built to <em>compound</em>.</h1>
+    <p class="hero-sub">A growing collection of system architectures, automation pipelines, and engineering decks.</p>
+    <a href="#decks" class="hero-cta">Browse decks</a>
+    <p class="hero-meta">Last updated July 2026</p>
+  </section>
 
-      <!-- Section 1: Hermes vs 챗봇 -->
-      <section data-markdown="slides/01-hermes-vs-chatbot.md"
-               data-separator="^---$"
-               data-separator-vertical="^----$"
-               data-separator-notes="^Note:">
-      </section>
+  <!-- Decks -->
+  <section class="decks-section" id="decks">
+    <div class="section-header">
+      <p class="section-tag">Decks</p>
+      <h2 class="section-title">Presentation archive</h2>
+      <p class="section-sub">Self-hosted on GitHub Pages · keyboard-driven navigation · zero build step</p>
+    </div>
 
-      <!-- Section 2: Hybrid AI Stack -->
-      <section data-markdown="slides/02-hybrid-stack.md"
-               data-separator="^---$"
-               data-separator-vertical="^----$"
-               data-separator-notes="^Note:">
-      </section>
+    <div class="deck-grid">
 
-      <!-- Section 3: Pipeline -->
-      <section data-markdown="slides/03-pipeline.md"
-               data-separator="^---$"
-               data-separator-vertical="^----$"
-               data-separator-notes="^Note:">
-      </section>
+      <a class="deck-card" href="decks/hermes-architecture/">
+        <div class="deck-thumb">
+          <span class="deck-thumb-glyph">HA</span>
+          <span class="deck-thumb-label">Configuration Architecture</span>
+        </div>
+        <div class="deck-body">
+          <p class="deck-tag">Live · Featured</p>
+          <h3 class="deck-title">Hermes Configuration Architecture</h3>
+          <p class="deck-desc">A seven-component agent system: long-term memory, configurable brain, soul manifest, and self-writing skill manual. Designed to compound over time.</p>
+          <div class="deck-meta">
+            <span class="deck-meta-item">~25 slides</span>
+            <span class="deck-meta-item">Architecture</span>
+            <span class="deck-meta-item">Reveal.js</span>
+          </div>
+          <span class="deck-cta">View deck</span>
+        </div>
+      </a>
 
-      <!-- Section 4: LangGraph -->
-      <section data-markdown="slides/04-langgraph.md"
-               data-separator="^---$"
-               data-separator-vertical="^----$"
-               data-separator-notes="^Note:">
-      </section>
-
-      <!-- Section 5: Cron Jobs -->
-      <section data-markdown="slides/05-cron.md"
-               data-separator="^---$"
-               data-separator-vertical="^----$"
-               data-separator-notes="^Note:">
-      </section>
-
-      <!-- Section 6: SSoT + Wiki Super -->
-      <section data-markdown="slides/06-ssot-wiki.md"
-               data-separator="^---$"
-               data-separator-vertical="^----$"
-               data-separator-notes="^Note:">
-      </section>
-
-      <!-- Section 7: Outro -->
-      <section data-markdown="slides/99-outro.md"
-               data-separator="^---$"
-               data-separator-vertical="^----$"
-               data-separator-notes="^Note:">
-      </section>
+      <!-- Future deck placeholder -->
+      <div class="deck-card deck-empty">
+        <div class="deck-empty-content">
+          <h3>More decks coming</h3>
+          <p>This portfolio scales. Add new decks under <code>decks/&lt;name&gt;/</code>.</p>
+        </div>
+      </div>
 
     </div>
-  </div>
+  </section>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+  <!-- Footer -->
+  <footer>
+    <p>Built with Reveal.js · Hosted on GitHub Pages · <a href="https://github.com/mybotagent/hermes-architecture-deck">View source</a></p>
+  </footer>
 
-  <!-- mermaid.js (ESM) -->
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'dark',
-      securityLevel: 'loose',
-      fontFamily: 'system-ui, sans-serif',
-      flowchart: { curve: 'basis', padding: 10 },
-      gantt: { useMaxWidth: true }
-    });
-
-    // 화면에 에러 표시 헬퍼
-    const showError = (msg, container) => {
-      const err = document.createElement('div');
-      err.style.cssText = 'background:#5c1a1a;border:2px solid #ff4444;color:#ffaaaa;padding:0.8em;border-radius:6px;margin:0.5em 0;font-size:0.5em;font-family:monospace;';
-      err.innerHTML = '⚠️ <strong>Mermaid Error</strong><br><pre style="white-space:pre-wrap;margin:0.4em 0 0 0;">' + msg.replace(/</g,'&lt;') + '</pre>';
-      if (container) container.replaceWith(err);
-    };
-
-    // Reveal ready 후 ```mermaid 블록을 mermaid로 렌더
-    const renderMermaid = async () => {
-      const codes = document.querySelectorAll('.reveal pre code.language-mermaid, .reveal pre code.lang-mermaid');
-      if (codes.length === 0) return;
-      const divs = [];
-      for (let i = 0; i < codes.length; i++) {
-        const code = codes[i];
-        const pre = code.parentElement;
-        const source = code.textContent;
-        const div = document.createElement('div');
-        div.className = 'mermaid';
-        div.textContent = source;
-        div.id = `mermaid-graph-${i}`;
-        divs.push({ div, pre });
-      }
-      try {
-        // div를 한 번에 DOM에 삽입 후 mermaid 실행
-        divs.forEach(({ div, pre }) => pre.replaceWith(div));
-        await mermaid.run({ querySelector: '.mermaid' });
-      } catch (err) {
-        console.error('Mermaid render error:', err);
-        const msg = (err && err.message) ? err.message : String(err);
-        // 실패한 그래프를 화면에 에러로 표시
-        document.querySelectorAll('.mermaid').forEach((d) => {
-          if (!d.querySelector('svg')) {
-            d.innerHTML = '<div style="background:#5c1a1a;border:2px solid #ff4444;color:#ffaaaa;padding:0.8em;border-radius:6px;font-size:0.55em;font-family:monospace;">⚠️ <strong>Mermaid parse error</strong><br><pre style="white-space:pre-wrap;margin:0.4em 0 0 0;">' + msg.replace(/</g,'&lt;') + '</pre></div>';
-          }
-        });
-      }
-    };
-
-    Reveal.on('ready', () => setTimeout(renderMermaid, 1500));
-    Reveal.on('slidechanged', () => setTimeout(renderMermaid, 500));
-
-    Reveal.initialize({
-      hash: true,
-      controls: true,
-      progress: true,
-      slideNumber: 'c/t',
-      overview: true,
-      center: true,
-      transition: 'slide',
-      transitionSpeed: 'fast',
-      plugins: [ RevealMarkdown, RevealNotes, RevealHighlight ],
-      markdown: {
-        smartypants: false,
-        gfm: true
-      }
-    });
-  </script>
 </body>
 </html>
