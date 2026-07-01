@@ -126,34 +126,3 @@ fallback_chain:
 <tr><td><strong>Alarm</strong></td><td>not used — this was interactive, not cron-triggered</td></tr>
 </tbody>
 </table>
-
----
-
-# Discord Three-Way Meeting
-
-<h3>The cast</h3>
-
-<ul>
-<li><strong>Hermes</strong> (the assistant) — owns Memory and Soul, coordinates dispatch, always speaks first.</li>
-<li><strong>Claude Bot A</strong> (Plannerbot) — code and planning. Long context, large file analysis, refactors.</li>
-<li><strong>Claude Bot B</strong> (Verifierbot) — research and verification. External lookups, cross-checks numbers, quotes sources.</li>
-</ul>
-
-<h3>The flow</h3>
-<h3>When each bot speaks</h3>
-
-<table>
-<thead>
-<tr><th>Bot</th><th>Speaks when</th><th>Stays silent when</th></tr>
-</thead>
-<tbody>
-<tr><td>Hermes</td><td>always, as orchestrator</td><td>—</td></tr>
-<tr><td>Claude Bot A</td><td>code is on the table</td><td>task is research-only</td></tr>
-<tr><td>Claude Bot B</td><td>facts need cross-checking</td><td>the answer is in Memory already</td></tr>
-</tbody>
-</table>
-
-<h3>The rule</h3>
----
-
-# Discord Three-Way Meeting

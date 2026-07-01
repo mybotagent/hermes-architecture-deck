@@ -1,45 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" width="800" height="320" preserveAspectRatio="xMidYMid meet" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400" preserveAspectRatio="xMidYMid meet" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif">
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <filter id="cardShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <filter id="highlightShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0066cc" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#0066cc"/>
     </marker>
-    <marker id="arrow-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#34c759"/>
     </marker>
   </defs>
 
-  <!-- Box 1: workflow run -->
-  <rect x="40" y="100" width="170" height="70" rx="12" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.5"/>
-  <text x="125" y="130" text-anchor="middle" font-size="17" font-weight="600" fill="#1d1d1f">① run</text>
-  <text x="125" y="152" text-anchor="middle" font-size="12" fill="#86868b">workflow</text>
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-size="13" font-weight="600" letter-spacing="2.5" fill="#86868b">SKILL COMPOUND LOOP</text>
+
+  <!-- Step 1: Run -->
+  <g filter="url(#cardShadow)">
+    <rect x="50" y="115" width="200" height="90" rx="20" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.5"/>
+  </g>
+  <text x="150" y="155" text-anchor="middle" font-size="24" font-weight="600" fill="#1d1d1f">①</text>
+  <text x="150" y="183" text-anchor="middle" font-size="18" font-weight="500" fill="#1d1d1f">Run</text>
+  <text x="150" y="200" text-anchor="middle" font-size="12" fill="#86868b">workflow</text>
 
   <!-- Arrow 1→2 -->
-  <line x1="220" y1="135" x2="320" y2="135" stroke="#0066cc" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="258" y1="160" x2="338" y2="160" stroke="#0066cc" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
 
-  <!-- Box 2: procedure written (highlighted as the manual) -->
-  <rect x="330" y="100" width="200" height="70" rx="12" fill="#ffffff" stroke="#0066cc" stroke-width="2.5"/>
-  <text x="430" y="130" text-anchor="middle" font-size="16" font-weight="600" fill="#0066cc">② manual written</text>
-  <text x="430" y="152" text-anchor="middle" font-size="12" fill="#86868b">procedure saved to skill.md</text>
+  <!-- Step 2: Manual Written (highlighted) -->
+  <g filter="url(#highlightShadow)">
+    <rect x="350" y="115" width="220" height="90" rx="20" fill="#ffffff" stroke="#0066cc" stroke-width="2.5"/>
+  </g>
+  <text x="460" y="150" text-anchor="middle" font-size="24" font-weight="600" fill="#0066cc">②</text>
+  <text x="460" y="178" text-anchor="middle" font-size="18" font-weight="600" fill="#0066cc">Manual written</text>
+  <text x="460" y="196" text-anchor="middle" font-size="12" fill="#86868b">saved to skill.md</text>
 
   <!-- Arrow 2→3 -->
-  <line x1="540" y1="135" x2="640" y2="135" stroke="#0066cc" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="578" y1="160" x2="658" y2="160" stroke="#0066cc" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
 
-  <!-- Box 3: faster -->
-  <rect x="650" y="100" width="120" height="70" rx="12" fill="#ffffff" stroke="#34c759" stroke-width="1.5"/>
-  <text x="710" y="132" text-anchor="middle" font-size="20" font-weight="600" fill="#2a7d3e">③</text>
-  <text x="710" y="155" text-anchor="middle" font-size="12" font-weight="500" fill="#2a7d3e">faster</text>
+  <!-- Step 3: Faster -->
+  <g filter="url(#cardShadow)">
+    <rect x="670" y="115" width="100" height="90" rx="20" fill="#ffffff" stroke="#34c759" stroke-width="2"/>
+  </g>
+  <text x="720" y="155" text-anchor="middle" font-size="24" font-weight="600" fill="#2a7d3e">③</text>
+  <text x="720" y="183" text-anchor="middle" font-size="16" font-weight="600" fill="#2a7d3e">faster</text>
+  <text x="720" y="200" text-anchor="middle" font-size="12" fill="#2a7d3e">next run</text>
 
-  <!-- Loop back path (curved dashed) -->
-  <path d="M 710 240 Q 430 290 430 175" stroke="#34c759" stroke-width="2" stroke-dasharray="6,4" fill="none" marker-end="url(#arrow-d)"/>
+  <!-- Loop-back path (curved, from step 3 down to step 4, then up to step 2) -->
+  <path d="M 720 270 Q 720 330 460 330 L 460 220" stroke="#34c759" stroke-width="2" stroke-dasharray="6,4" fill="none" marker-end="url(#arrow-green)"/>
 
-  <!-- Box 4: more experience -->
-  <rect x="350" y="240" width="220" height="70" rx="12" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.5"/>
-  <text x="460" y="270" text-anchor="middle" font-size="17" font-weight="600" fill="#1d1d1f">④ more experience</text>
-  <text x="460" y="292" text-anchor="middle" font-size="12" fill="#86868b">feeds back into the cycle</text>
-
-  <!-- Top label -->
-  <text x="400" y="40" text-anchor="middle" font-size="14" font-weight="500" fill="#86868b" letter-spacing="1">SKILL COMPOUND LOOP</text>
+  <!-- Step 4: More Experience -->
+  <g filter="url(#cardShadow)">
+    <rect x="370" y="290" width="220" height="80" rx="20" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.5"/>
+  </g>
+  <text x="480" y="320" text-anchor="middle" font-size="24" font-weight="600" fill="#1d1d1f">④</text>
+  <text x="480" y="345" text-anchor="middle" font-size="18" font-weight="500" fill="#1d1d1f">More experience</text>
+  <text x="480" y="362" text-anchor="middle" font-size="12" fill="#86868b">feeds back into the cycle</text>
 
   <!-- Bottom note -->
-  <text x="400" y="335" text-anchor="middle" font-size="12" fill="#86868b" font-style="italic">The Manual is the engine of compounding</text>
+  <text x="400" y="392" text-anchor="middle" font-size="11" font-style="italic" fill="#86868b">The Manual is the engine of compounding</text>
 </svg>

@@ -70,21 +70,26 @@
       text-align: center !important;
       position: absolute;
     }
-/* Single slide — scrollable, padded */
+/* Single slide — scrollable, padded, vertically + horizontally centered */
     .reveal .slides > section {
       width: 100% !important;
       height: 100% !important;
       position: absolute !important;
       top: 0 !important; left: 0 !important;
       display: none !important;
-      padding: 3vh 3.5vw !important;
+      padding: 4vh 4vw !important;
       text-align: center !important;
       overflow-y: auto !important;
       overflow-x: hidden !important;
       -webkit-overflow-scrolling: touch;
       background: #ffffff;
     }
-    .reveal .slides > section.present { display: block !important; }
+    .reveal .slides > section.present {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
 
     /* Keep tables and code blocks within slide width */
     .reveal .slides > section > * {
