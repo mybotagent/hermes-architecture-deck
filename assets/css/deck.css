@@ -23,10 +23,17 @@
   font-feature-settings: "ss01", "ss02";
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.01em;
-  text-align: left;
+  text-align: center;
 }
 
-.reveal .slides { text-align: left; }
+.reveal .slides {
+  text-align: center;
+}
+
+.reveal .slides > section {
+  text-align: left;
+  padding: 1.5em 2.5em;
+}
 
 /* Apple typography hierarchy */
 .reveal h1 {
