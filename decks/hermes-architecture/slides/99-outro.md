@@ -1,26 +1,119 @@
-# 🧬 The System = Brain + Soul + Memory
+# 🧬 The Architecture in One Picture
 
-> Swap the brain, keep the memory, keep the soul.
-> **Zero re-learning cost.**
+> Seven components. Three principles. One SSoT. That's the entire system.
+
+<div class="flow-chart">
+  <div class="flow-row">
+    <div class="flow-node simple">
+      <span class="node-label">👤 User</span>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-row">
+    <div class="flow-node tooling">
+      <span class="node-label">📡 Channel</span>
+      <span class="node-sub">20+ gateway</span>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-group">
+    <span class="flow-group-label">Long-term organs (survive brain swap)</span>
+    <div class="flow-row">
+      <div class="flow-node long-term">
+        <span class="node-label">🧠 Brain</span>
+      </div>
+      <div class="flow-arrow right"></div>
+      <div class="flow-node long-term">
+        <span class="node-label">👻 Soul</span>
+      </div>
+      <div class="flow-arrow right"></div>
+      <div class="flow-node long-term">
+        <span class="node-label">💾 Memory</span>
+      </div>
+      <div class="flow-arrow right"></div>
+      <div class="flow-node long-term">
+        <span class="node-label">📖 Manual</span>
+      </div>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-row">
+    <div class="flow-node tooling">
+      <span class="node-label">🛠 Hands</span>
+      <span class="node-sub">20+ tools</span>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-row">
+    <div class="flow-node simple">
+      <span class="node-label">👤 User</span>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-row">
+    <div class="flow-node compute">
+      <span class="node-label">⏰ Alarm</span>
+      <span class="node-sub">cron · auto-wakes Brain</span>
+    </div>
+  </div>
+</div>
+
+<div class="small">
+
+> **Swap the brain. Keep the memory. Keep the soul.** Zero re-learning cost.
+
+</div>
 
 ---
 
-## Next Steps
+# What Makes It Compound
 
-### P1 → P7 ✅ (live now)
-- This deck (25 slides, all text-based flowcharts)
-- GitHub Pages auto-build (legacy mode)
-- Apple-inspired dark mode design system
-- All copy in English
+> Three reinforcing loops, all writing back to the long-term organs.
 
-### P8 (planned) — Wiki auto-sync
-- `hermes-wiki` push → webhook → trigger deck rebuild
-- Or weekly cron pulls wiki → rebuild
+<div class="flow-chart">
+  <div class="flow-group">
+    <span class="flow-group-label">Loop 1 · Skill compounding</span>
+    <div class="flow-row">
+      <div class="flow-node simple">① run</div>
+      <div class="flow-arrow right"></div>
+      <div class="flow-node data">② manual</div>
+      <div class="flow-arrow right"></div>
+      <div class="flow-node output">③ faster</div>
+    </div>
+  </div>
 
-### Series Expansion
-- This deck covers the agent system architecture only
-- Future decks (data analysis, automation patterns, business workflows) can reuse this template
-- Add under `decks/<topic-name>/`
+  <div class="flow-arrow"></div>
+
+  <div class="flow-group">
+    <span class="flow-group-label">Loop 2 · Memory distillation</span>
+    <div class="flow-row">
+      <div class="flow-node simple">① session</div>
+      <div class="flow-arrow right"></div>
+      <div class="flow-node data">② Honcho</div>
+      <div class="flow-arrow right"></div>
+      <div class="flow-node output">③ notebook</div>
+    </div>
+  </div>
+
+  <div class="flow-arrow"></div>
+
+  <div class="flow-group">
+    <span class="flow-group-label">Loop 3 · Pipeline refinement</span>
+    <div class="flow-row">
+      <div class="flow-node simple">① monthly review</div>
+      <div class="flow-arrow right"></div>
+      <div class="flow-node data">② analysis</div>
+      <div class="flow-arrow right"></div>
+      <div class="flow-node output">③ improvements</div>
+    </div>
+  </div>
+</div>
+
+<div class="small">
+
+All three loops write back to **long-term organs** (memory.md, skill.md, monthly_review). The agent gets measurably better every cycle — that's the architecture's whole point.
+
+</div>
 
 ---
 

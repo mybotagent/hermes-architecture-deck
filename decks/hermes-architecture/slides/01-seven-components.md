@@ -1,15 +1,14 @@
 # Chatbots forget. Hermes compounds.
 
-> A chatbot has a brain. An employee has seven organs.
-> Hermes configures all seven so the system gets smarter every run.
+> A chatbot has a brain. An employee has seven organs. Hermes configures all seven so the system gets smarter with every run.
 
-## Side by side
+## Comparison: Chatbot vs Hermes
 
-| | Chatbot | Hermes |
+| Capability | Chatbot | Hermes |
 |---|---|---|
 | **Brain** (intelligence) | ✅ | ✅ |
 | **Hands** (execution) | ❌ | ✅ 20+ tools |
-| **Memory** (continuity) | ❌ resets per session | ✅ notebook + vector |
+| **Memory** (continuity) | ❌ resets every session | ✅ notebook + vector |
 | **Manual** (self-improvement) | ❌ | ✅ skill.md |
 | **Channel** (gateway) | web only | ✅ 20+ (Discord, Telegram, Slack) |
 | **Alarm** (automation) | ❌ | ✅ cron |
@@ -17,100 +16,152 @@
 
 <div class="small">
 
-> Swap the brain, keep the memory, keep the soul — the brain is the only replaceable module.
+> **Key insight**: swap the brain, keep the memory, keep the soul. The brain is the only replaceable module. Everything else survives a model upgrade.
 
 </div>
 
 ---
 
-# 🧠 The Seven Components
+<section class="section-opener">
 
-<div class="flow-tree">
-<span class="node">[Long-term Organs — persist across swaps]</span>
+<span class="section-num">S1 · The Seven Components</span>
 
-    🧠 Brain       →  config            (replaceable AI model)
-    👻 Soul        →  soul.md           (persona + tone + taboos)
-    💾 Memory      →  memory.md + user  (notebook, 2KB budget)
-    📖 Manual      →  skill.md          (self-written procedures)
+# 🧠 Long-Term Organs
+### The four components that survive a brain swap
 
-<span class="node">[Employee-ization Devices — external interfaces]</span>
+</section>
 
-    🛠 Hands        →  tools              (terminal, file, web, delegate)
-    📡 Channel     →  20+ gateway         (Discord, Telegram, Slack…)
-    ⏰ Alarm       →  cron                (auto-wake, work, sleep)
-
-<span class="node">[Flow]</span>
-    User → Channel → Brain → Soul → Memory → Manual → Hands → User
-                                              ↑
-                                       Alarm (cron) auto-triggers Brain
+<div class="flow-chart">
+  <div class="flow-row">
+    <div class="flow-node long-term">
+      <span class="node-label">🧠 Brain</span>
+      <span class="node-sub">config</span>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-row">
+    <div class="flow-node long-term">
+      <span class="node-label">👻 Soul</span>
+      <span class="node-sub">soul.md</span>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-row">
+    <div class="flow-node long-term">
+      <span class="node-label">💾 Memory</span>
+      <span class="node-sub">memory.md + user.md</span>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-row">
+    <div class="flow-node long-term">
+      <span class="node-label">📖 Manual</span>
+      <span class="node-sub">skill.md</span>
+    </div>
+  </div>
 </div>
 
 <div class="small">
 
-**Front 4 = long-term** (survive brain swap) · **Back 3 = employee-ization** (external surface)
+**These four are persistent** — they don't get re-trained when you swap the underlying model. Only the brain is hot-swappable.
 
 </div>
 
 ---
 
-# Memory in Two Layers
+<section class="section-opener">
 
-<div class="flow-tree">
-<span class="node">[Layer 1: Notebook — always loaded, 2KB budget]</span>
+<span class="section-num">S1 · The Seven Components</span>
 
-    memory.md + user.md
-    → distilled every turn
-    → critical facts only
+# 🛠 Employee-ization Devices
+### The three components that turn a brain into an employee
 
-<span class="node">[Layer 2: Vector DB — retrieved on demand]</span>
+</section>
 
-    Honcho / pgvector
-    → full history available
-    → loaded when relevant
-
-<span class="node">[Honcho memory]</span>
-    End-of-session → user never said → infers preference
-    → writes back to notebook automatically
-</div>
-
-| Layer | Storage | Loaded | Capacity |
-|---|---|---|---|
-| **Notebook** | `memory.md` + `user.md` | every session | 2K chars (compressed) |
-| **Vector** | Honcho / pgvector | on demand | unlimited |
-
----
-
-# 📈 The Skill Compound Loop
-
-<div class="flow-tree">
-<span class="node">[The compounding cycle]</span>
-
-    ┌─ First run: trial-and-error ─────────────┐
-    │                                            │
-    │   ▼                                        │
-    │  Success                                    │
-    │   │                                        │
-    │   ▼                                        │
-    │  Manual auto-written                        │
-    │   │                                        │
-    │   ▼                                        │
-    │  Next run: consults manual                  │
-    │   │                                        │
-    │   ▼                                        │
-    │  Faster execution                           │
-    │   │                                        │
-    │   ▼                                        │
-    │  More experience  ─────────────► writes manual
-    │
-    └───── Compounding ─────┘
-
-<span class="node">[Chatbot vs Hermes]</span>
-    Chatbot: starts from zero every run
-    Hermes:  yesterday's output → today's starting point
+<div class="flow-chart">
+  <div class="flow-row">
+    <div class="flow-node tooling">
+      <span class="node-label">🛠 Hands</span>
+      <span class="node-sub">terminal · file · web · delegate</span>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-row">
+    <div class="flow-node tooling">
+      <span class="node-label">📡 Channel</span>
+      <span class="node-sub">20+ gateway</span>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-row">
+    <div class="flow-node tooling">
+      <span class="node-label">⏰ Alarm</span>
+      <span class="node-sub">cron scheduler</span>
+    </div>
+  </div>
 </div>
 
 <div class="small">
 
-⚠️ **Overfit warning**: habits can ossify. The user must periodically audit the manual.
+**These three are interfaces** — they connect the agent to the outside world (you, your channels, your schedule). The brain has no idea who you are without these.
+
+</div>
+
+---
+
+# The Wiring — How the Seven Connect
+
+<div class="flow-chart">
+  <div class="flow-row">
+    <div class="flow-node simple">
+      <span class="node-label">👤 User</span>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-row">
+    <div class="flow-node tooling">
+      <span class="node-label">📡 Channel</span>
+      <span class="node-sub">gateway</span>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-group">
+    <span class="flow-group-label">Long-term organs</span>
+    <div class="flow-row">
+      <div class="flow-node long-term">
+        <span class="node-label">🧠 Brain</span>
+      </div>
+      <div class="flow-arrow right"></div>
+      <div class="flow-node long-term">
+        <span class="node-label">👻 Soul</span>
+      </div>
+      <div class="flow-arrow right"></div>
+      <div class="flow-node long-term">
+        <span class="node-label">💾 Memory</span>
+      </div>
+      <div class="flow-arrow right"></div>
+      <div class="flow-node long-term">
+        <span class="node-label">📖 Manual</span>
+      </div>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-row">
+    <div class="flow-node tooling">
+      <span class="node-label">🛠 Hands</span>
+      <span class="node-sub">tools</span>
+    </div>
+  </div>
+  <div class="flow-arrow"></div>
+  <div class="flow-row">
+    <div class="flow-node simple">
+      <span class="node-label">👤 User</span>
+    </div>
+  </div>
+</div>
+
+<div class="small">
+
+**Parallel path**: `⏰ Alarm` (cron) auto-triggers `🧠 Brain` at scheduled hours — no user prompt required.
 
 </div>
