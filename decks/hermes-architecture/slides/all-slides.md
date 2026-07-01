@@ -61,7 +61,7 @@ fallback_chain:
 # Manual
 <div style="text-align:center; margin:1em 0;">
 
-<p><img src="../../assets/img/compound-loop.svg?v=6" alt="Skill compound loop" style="max-width:100%;height:auto;"></p>
+<p><img src="../assets/img/compound-loop.svg?v=6" alt="Skill compound loop" style="max-width:100%;height:auto;"></p>
 
 </div>
 
@@ -102,7 +102,7 @@ fallback_chain:
 ---
 
 # The Compound Effect
-<p><img src="../../assets/img/three-loops.svg?v=6" alt="Three compound loops" style="max-width:100%;height:auto;"></p>
+<p><img src="../assets/img/three-loops.svg?v=6" alt="Three compound loops" style="max-width:100%;height:auto;"></p>
 
 <p>After three months the system runs materially faster on the same inputs — not because the Brain got smarter, but because everything around the Brain got tighter. The Manual is shorter to read. The Memory is already pointed at the right thing. The Pipeline's prompts are sharper.</p>
 
@@ -114,7 +114,7 @@ fallback_chain:
 
 <div style="text-align:center; margin:1em 0;">
 
-<p><img src="../../assets/img/wiki-architecture.svg?v=6" alt="LLM Wiki + GitHub submodule architecture" style="max-width:100%;height:auto;"></p>
+<p><img src="../assets/img/wiki-architecture.svg?v=6" alt="LLM Wiki + GitHub submodule architecture" style="max-width:100%;height:auto;"></p>
 
 </div>
 
