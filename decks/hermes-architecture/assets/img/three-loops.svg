@@ -1,16 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet" width="1000" height="560" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet" width="1000" height="600" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif">
   <defs>
     <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.06"/>
-    </filter>
-    <filter id="glowBlue" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#0066cc" flood-opacity="0.25"/>
-    </filter>
-    <filter id="glowOrange" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#ff9500" flood-opacity="0.22"/>
-    </filter>
-    <filter id="glowPurple" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#af52de" flood-opacity="0.22"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.08"/>
     </filter>
     <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#0066cc"/>
@@ -21,157 +12,118 @@
     <marker id="arrowPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#af52de"/>
     </marker>
-    <marker id="arrowUp" viewBox="0 0 10 10" refX="5" refY="0" markerWidth="9" markerHeight="9" orient="auto">
-      <path d="M0,10 L5,0 L10,10 z" fill="#86868b"/>
-    </marker>
   </defs>
 
   <style>
-    .box-blue { fill: #ffffff; stroke: #0066cc; stroke-width: 1.8; }
-    .box-orange { fill: #ffffff; stroke: #ff9500; stroke-width: 1.8; }
-    .box-purple { fill: #ffffff; stroke: #af52de; stroke-width: 1.8; }
-    .node-blue { fill: rgba(0,102,204,0.04); stroke: #0066cc; stroke-width: 1; }
-    .node-orange { fill: rgba(255,149,0,0.04); stroke: #ff9500; stroke-width: 1; }
-    .node-purple { fill: rgba(175,82,222,0.04); stroke: #af52de; stroke-width: 1; }
-    .loop-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; }
-    .loop-num { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; fill: #ffffff; }
-    .title { font-size: 16px; font-weight: 600; fill: #1d1d1f; }
-    .body { font-size: 12px; font-weight: 400; fill: #6e6e73; }
-    .time-label { font-size: 10px; font-weight: 600; fill: #86868b; letter-spacing: 1px; }
-    .compound-label { font-size: 13px; font-weight: 700; fill: #1d1d1f; letter-spacing: 1.5px; }
-    .arrow-blue { stroke: #0066cc; stroke-width: 1.8; fill: none; }
-    .arrow-orange { stroke: #ff9500; stroke-width: 1.8; fill: none; }
-    .arrow-purple { stroke: #af52de; stroke-width: 1.8; fill: none; }
-    .arrow-gray { stroke: #86868b; stroke-width: 1.2; fill: none; stroke-dasharray: 3,3; }
+    .label-blue { font-size: 14px; font-weight: 700; fill: #0066cc; letter-spacing: 2px; }
+    .label-orange { font-size: 14px; font-weight: 700; fill: #ff9500; letter-spacing: 2px; }
+    .label-purple { font-size: 14px; font-weight: 700; fill: #af52de; letter-spacing: 2px; }
+    .time-label { font-size: 10px; font-weight: 600; fill: #86868b; letter-spacing: 1.5px; }
+    .node-blue { fill: #ffffff; stroke: #0066cc; stroke-width: 1.8; }
+    .node-orange { fill: #ffffff; stroke: #ff9500; stroke-width: 1.8; }
+    .node-purple { fill: #ffffff; stroke: #af52de; stroke-width: 1.8; }
+    .title { font-size: 15px; font-weight: 600; fill: #1d1d1f; }
+    .body { font-size: 11px; font-weight: 400; fill: #6e6e73; }
+    .caption { font-size: 11px; font-weight: 600; fill: #1d1d1f; letter-spacing: 1px; }
+    .arrow-blue { stroke: #0066cc; stroke-width: 2; fill: none; }
+    .arrow-orange { stroke: #ff9500; stroke-width: 2; fill: none; }
+    .arrow-purple { stroke: #af52de; stroke-width: 2; fill: none; }
+    .time-line { stroke: #86868b; stroke-width: 1.2; fill: none; stroke-dasharray: 4,3; }
   </style>
 
-  <rect width="1000" height="560" fill="#ffffff"/>
+  <rect width="1000" height="600" fill="#ffffff"/>
 
-  <!-- Top header: time arrow -->
-  <g transform="translate(60, 30)">
-    <text x="0" y="0" class="time-label">DAY 1</text>
-    <line x1="60" y1="-4" x2="880" y2="-4" class="arrow-gray" marker-end="url(#arrowUp)"/>
-    <text x="900" y="0" class="time-label">DAY 90</text>
+  <!-- Time arrow header (centered, no overlap) -->
+  <text x="100" y="38" class="time-label">DAY 1</text>
+  <line x1="145" y1="34" x2="855" y2="34" class="time-line"/>
+  <polygon points="855,28 865,34 855,40" fill="#86868b"/>
+  <text x="880" y="38" class="time-label">DAY 90</text>
+
+  <!-- ============== LOOP 1: MANUAL (Blue) ============== -->
+  <!-- Centered label above the row (NO LEFT OVERLAP) -->
+  <text x="500" y="78" text-anchor="middle" class="label-blue">LOOP 1 · MANUAL</text>
+
+  <!-- 3 nodes: positioned with even spacing, all within 100-900 horizontal -->
+  <g transform="translate(200, 140)" filter="url(#cardShadow)">
+    <rect x="-90" y="-28" width="180" height="56" rx="10" class="node-blue"/>
+    <text x="0" y="-4" text-anchor="middle" class="title">workflow run</text>
+    <text x="0" y="14" text-anchor="middle" class="body">do the task</text>
   </g>
 
-  <!-- ===== LOOP 1: MANUAL (Blue) ===== -->
-  <g transform="translate(0, 80)">
-    <!-- Loop label -->
-    <g transform="translate(60, 20)">
-      <rect x="-4" y="-14" width="170" height="28" rx="14" class="box-blue" filter="url(#glowBlue)"/>
-      <text x="80" y="6" text-anchor="middle" class="loop-label" fill="#0066cc">LOOP 1 · MANUAL</text>
-    </g>
-
-    <!-- Node A: workflow run -->
-    <g transform="translate(200, 20)" filter="url(#cardShadow)">
-      <rect x="-80" y="-25" width="160" height="50" rx="10" class="node-blue"/>
-      <text x="0" y="-4" text-anchor="middle" class="title">workflow run</text>
-      <text x="0" y="14" text-anchor="middle" class="body">do the task</text>
-    </g>
-
-    <!-- Node B: procedure written -->
-    <g transform="translate(500, 20)" filter="url(#cardShadow)">
-      <rect x="-100" y="-25" width="200" height="50" rx="10" class="node-blue"/>
-      <text x="0" y="-4" text-anchor="middle" class="title">procedure written</text>
-      <text x="0" y="14" text-anchor="middle" class="body">SKILL.md updated</text>
-    </g>
-
-    <!-- Node C: next run faster -->
-    <g transform="translate(820, 20)" filter="url(#cardShadow)">
-      <rect x="-90" y="-25" width="180" height="50" rx="10" class="node-blue"/>
-      <text x="0" y="-4" text-anchor="middle" class="title">next run faster</text>
-      <text x="0" y="14" text-anchor="middle" class="body">less time, fewer mistakes</text>
-    </g>
-
-    <!-- Arrows: A → B → C -->
-    <path d="M 280 20 L 400 20" class="arrow-blue" marker-end="url(#arrowBlue)"/>
-    <path d="M 600 20 L 730 20" class="arrow-blue" marker-end="url(#arrowBlue)"/>
-
-    <!-- Loop-back arrow: C → A (curved, blue) -->
-    <path d="M 820 45 Q 820 95 500 95 Q 200 95 200 45" class="arrow-blue" marker-end="url(#arrowBlue)"/>
-
-    <!-- Bottom label -->
-    <text x="500" y="115" text-anchor="middle" class="compound-label">⌁ MANUAL cost: minutes — BRAIN cost without manual: hours</text>
+  <g transform="translate(500, 140)" filter="url(#cardShadow)">
+    <rect x="-100" y="-28" width="200" height="56" rx="10" class="node-blue"/>
+    <text x="0" y="-4" text-anchor="middle" class="title">procedure written</text>
+    <text x="0" y="14" text-anchor="middle" class="body">SKILL.md updated</text>
   </g>
 
-  <!-- ===== LOOP 2: MEMORY (Orange) ===== -->
-  <g transform="translate(0, 240)">
-    <!-- Loop label -->
-    <g transform="translate(60, 20)">
-      <rect x="-4" y="-14" width="180" height="28" rx="14" class="box-orange" filter="url(#glowOrange)"/>
-      <text x="85" y="6" text-anchor="middle" class="loop-label" fill="#ff9500">LOOP 2 · MEMORY</text>
-    </g>
-
-    <!-- Node A: session ends -->
-    <g transform="translate(200, 20)" filter="url(#cardShadow)">
-      <rect x="-80" y="-25" width="160" height="50" rx="10" class="node-orange"/>
-      <text x="0" y="-4" text-anchor="middle" class="title">session ends</text>
-      <text x="0" y="14" text-anchor="middle" class="body">notes captured</text>
-    </g>
-
-    <!-- Node B: notebook updated -->
-    <g transform="translate(500, 20)" filter="url(#cardShadow)">
-      <rect x="-90" y="-25" width="180" height="50" rx="10" class="node-orange"/>
-      <text x="0" y="-4" text-anchor="middle" class="title">notebook updated</text>
-      <text x="0" y="14" text-anchor="middle" class="body">user.md + diary</text>
-    </g>
-
-    <!-- Node C: next turn warmer -->
-    <g transform="translate(820, 20)" filter="url(#cardShadow)">
-      <rect x="-90" y="-25" width="180" height="50" rx="10" class="node-orange"/>
-      <text x="0" y="-4" text-anchor="middle" class="title">next turn warmer</text>
-      <text x="0" y="14" text-anchor="middle" class="body">context pre-loaded</text>
-    </g>
-
-    <!-- Arrows -->
-    <path d="M 280 20 L 410 20" class="arrow-orange" marker-end="url(#arrowOrange)"/>
-    <path d="M 590 20 L 730 20" class="arrow-orange" marker-end="url(#arrowOrange)"/>
-
-    <!-- Loop-back -->
-    <path d="M 820 45 Q 820 95 500 95 Q 200 95 200 45" class="arrow-orange" marker-end="url(#arrowOrange)"/>
-
-    <!-- Bottom label -->
-    <text x="500" y="115" text-anchor="middle" class="compound-label">⌁ notebook holds 1,847 chars · every session reloads it</text>
+  <g transform="translate(800, 140)" filter="url(#cardShadow)">
+    <rect x="-100" y="-28" width="200" height="56" rx="10" class="node-blue"/>
+    <text x="0" y="-4" text-anchor="middle" class="title">next run faster</text>
+    <text x="0" y="14" text-anchor="middle" class="body">less time, fewer mistakes</text>
   </g>
 
-  <!-- ===== LOOP 3: PIPELINE (Purple) ===== -->
-  <g transform="translate(0, 400)">
-    <!-- Loop label -->
-    <g transform="translate(60, 20)">
-      <rect x="-4" y="-14" width="190" height="28" rx="14" class="box-purple" filter="url(#glowPurple)"/>
-      <text x="90" y="6" text-anchor="middle" class="loop-label" fill="#af52de">LOOP 3 · PIPELINE</text>
-    </g>
+  <!-- Forward arrows -->
+  <line x1="290" y1="140" x2="400" y2="140" class="arrow-blue" marker-end="url(#arrowBlue)"/>
+  <line x1="600" y1="140" x2="700" y2="140" class="arrow-blue" marker-end="url(#arrowBlue)"/>
 
-    <!-- Node A: monthly review -->
-    <g transform="translate(200, 20)" filter="url(#cardShadow)">
-      <rect x="-90" y="-25" width="180" height="50" rx="10" class="node-purple"/>
-      <text x="0" y="-4" text-anchor="middle" class="title">monthly review</text>
-      <text x="0" y="14" text-anchor="middle" class="body">1st of each month</text>
-    </g>
+  <!-- Loop-back arrow (curved) -->
+  <path d="M 800 168 Q 800 215 500 215 Q 200 215 200 168" class="arrow-blue" marker-end="url(#arrowBlue)"/>
 
-    <!-- Node B: past calls analyzed -->
-    <g transform="translate(500, 20)" filter="url(#cardShadow)">
-      <rect x="-95" y="-25" width="190" height="50" rx="10" class="node-purple"/>
-      <text x="0" y="-4" text-anchor="middle" class="title">past calls analyzed</text>
-      <text x="0" y="14" text-anchor="middle" class="body">misses + successes</text>
-    </g>
+  <!-- Bottom caption -->
+  <text x="500" y="240" text-anchor="middle" class="caption">⌁ MANUAL cost: minutes — BRAIN cost without manual: hours</text>
 
-    <!-- Node C: prompts sharper -->
-    <g transform="translate(820, 20)" filter="url(#cardShadow)">
-      <rect x="-90" y="-25" width="180" height="50" rx="10" class="node-purple"/>
-      <text x="0" y="-4" text-anchor="middle" class="title">prompts sharper</text>
-      <text x="0" y="14" text-anchor="middle" class="body">Soul.md refined</text>
-    </g>
+  <!-- ============== LOOP 2: MEMORY (Orange) ============== -->
+  <text x="500" y="285" text-anchor="middle" class="label-orange">LOOP 2 · MEMORY</text>
 
-    <!-- Arrows -->
-    <path d="M 290 20 L 405 20" class="arrow-purple" marker-end="url(#arrowPurple)"/>
-    <path d="M 595 20 L 730 20" class="arrow-purple" marker-end="url(#arrowPurple)"/>
-
-    <!-- Loop-back -->
-    <path d="M 820 45 Q 820 95 500 95 Q 200 95 200 45" class="arrow-purple" marker-end="url(#arrowPurple)"/>
-
-    <!-- Bottom label -->
-    <text x="500" y="115" text-anchor="middle" class="compound-label">⌁ the compound is in the file system, not in the model weights</text>
+  <g transform="translate(200, 340)" filter="url(#cardShadow)">
+    <rect x="-90" y="-28" width="180" height="56" rx="10" class="node-orange"/>
+    <text x="0" y="-4" text-anchor="middle" class="title">session ends</text>
+    <text x="0" y="14" text-anchor="middle" class="body">notes captured</text>
   </g>
+
+  <g transform="translate(500, 340)" filter="url(#cardShadow)">
+    <rect x="-100" y="-28" width="200" height="56" rx="10" class="node-orange"/>
+    <text x="0" y="-4" text-anchor="middle" class="title">notebook updated</text>
+    <text x="0" y="14" text-anchor="middle" class="body">user.md + diary</text>
+  </g>
+
+  <g transform="translate(800, 340)" filter="url(#cardShadow)">
+    <rect x="-100" y="-28" width="200" height="56" rx="10" class="node-orange"/>
+    <text x="0" y="-4" text-anchor="middle" class="title">next turn warmer</text>
+    <text x="0" y="14" text-anchor="middle" class="body">context pre-loaded</text>
+  </g>
+
+  <line x1="290" y1="340" x2="400" y2="340" class="arrow-orange" marker-end="url(#arrowOrange)"/>
+  <line x1="600" y1="340" x2="700" y2="340" class="arrow-orange" marker-end="url(#arrowOrange)"/>
+
+  <path d="M 800 368 Q 800 415 500 415 Q 200 415 200 368" class="arrow-orange" marker-end="url(#arrowOrange)"/>
+
+  <text x="500" y="440" text-anchor="middle" class="caption">⌁ notebook holds 1,847 chars · every session reloads it</text>
+
+  <!-- ============== LOOP 3: PIPELINE (Purple) ============== -->
+  <text x="500" y="485" text-anchor="middle" class="label-purple">LOOP 3 · PIPELINE</text>
+
+  <g transform="translate(200, 535)" filter="url(#cardShadow)">
+    <rect x="-90" y="-28" width="180" height="56" rx="10" class="node-purple"/>
+    <text x="0" y="-4" text-anchor="middle" class="title">monthly review</text>
+    <text x="0" y="14" text-anchor="middle" class="body">1st of each month</text>
+  </g>
+
+  <g transform="translate(500, 535)" filter="url(#cardShadow)">
+    <rect x="-100" y="-28" width="200" height="56" rx="10" class="node-purple"/>
+    <text x="0" y="-4" text-anchor="middle" class="title">past calls analyzed</text>
+    <text x="0" y="14" text-anchor="middle" class="body">misses + successes</text>
+  </g>
+
+  <g transform="translate(800, 535)" filter="url(#cardShadow)">
+    <rect x="-100" y="-28" width="200" height="56" rx="10" class="node-purple"/>
+    <text x="0" y="-4" text-anchor="middle" class="title">prompts sharper</text>
+    <text x="0" y="14" text-anchor="middle" class="body">Soul.md refined</text>
+  </g>
+
+  <line x1="290" y1="535" x2="400" y2="535" class="arrow-purple" marker-end="url(#arrowPurple)"/>
+  <line x1="600" y1="535" x2="700" y2="535" class="arrow-purple" marker-end="url(#arrowPurple)"/>
+
+  <text x="500" y="588" text-anchor="middle" class="caption">⌁ the compound is in the file system, not in the model weights</text>
 
 </svg>
