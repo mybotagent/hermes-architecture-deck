@@ -22,14 +22,14 @@
 
 ---
 
-<section class="section-opener">
+<div class="section-opener">
 
 <span class="section-num">S1 · The Seven Components</span>
 
 # 🧠 Long-Term Organs
 ### The four components that survive a brain swap
 
-</section>
+</div>
 
 <div class="flow-chart">
   <div class="flow-row">
@@ -69,14 +69,14 @@
 
 ---
 
-<section class="section-opener">
+<div class="section-opener">
 
 <span class="section-num">S1 · The Seven Components</span>
 
 # 🛠 Employee-ization Devices
 ### The three components that turn a brain into an employee
 
-</section>
+</div>
 
 <div class="flow-chart">
   <div class="flow-row">
