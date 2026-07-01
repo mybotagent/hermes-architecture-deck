@@ -1,42 +1,99 @@
 # ⚡ Hermes 시스템 해부
 
-## 챗봇에서 **직원**으로
+<h1 class="hero-title">챗봇에서 <em>직원</em>으로</h1>
 
-<sub>Architecture Deck v1 · 2026-07-01</sub>
-
-Note:
-환영합니다. 이 슬라이드는 Hermes Agent 시스템의 아키텍처를 풀어냅니다.
-위키(mybotagent/hermes-wiki)의 architecture/, analysis/, infra/ 페이지를 시각화한 결과물입니다.
+<p class="hero-sub">Architecture Deck · 26 slides · 11 mermaid diagrams</p>
 
 ---
 
-## TL;DR
+## 📑 섹션 인덱스 — 카드를 클릭하면 해당 섹션으로 이동합니다
 
-<div class="tldr">
+<div class="index-grid">
 
-**3가지 핵심**
+  <div class="index-card" onclick="Reveal.slide(2)">
+    <div class="card-icon">🧠</div>
+    <div class="card-num">S1</div>
+    <div class="card-title">Hermes vs 챗봇</div>
+    <div class="card-desc">장기 4개 + 직원화 장치 3개</div>
+    <div class="card-meta">4 slides · 3 mermaid</div>
+  </div>
 
-- 🧠 **두뇌 + 인격 + 기억** = 헤르메스의 7가지 부품 (챗봇엔 없는 장기)
-- ⚙️ **12 업무 × 3원칙** = 비용제로 + 최고성능 + 데이터 무오염
-- 🔄 **자동화 루프** = 매일 23:30 CST 분석 → 매월 5일 검증
+  <div class="index-card" onclick="Reveal.slide(6)">
+    <div class="card-icon">🚀</div>
+    <div class="card-num">S2</div>
+    <div class="card-title">Hybrid AI Stack</div>
+    <div class="card-desc">로컬 + 클라우드 + 무오염</div>
+    <div class="card-meta">4 slides · 3 mermaid</div>
+  </div>
 
-**숫자 요약**: 7부품 · 12업무 · 9크론 · 28슬라이드 · 10다이어그램
+  <div class="index-card" onclick="Reveal.slide(10)">
+    <div class="card-icon">⚙️</div>
+    <div class="card-num">S3</div>
+    <div class="card-title">자동화 파이프라인</div>
+    <div class="card-desc">cron + 멀티에이전트 워크플로우</div>
+    <div class="card-meta">3 slides · 2 mermaid</div>
+  </div>
+
+  <div class="index-card" onclick="Reveal.slide(13)">
+    <div class="card-icon">🔗</div>
+    <div class="card-num">S4</div>
+    <div class="card-title">5단계 분석 체인</div>
+    <div class="card-desc">Context → 4-Agent → Conclusion</div>
+    <div class="card-meta">3 slides · 1 mermaid</div>
+  </div>
+
+  <div class="index-card" onclick="Reveal.slide(16)">
+    <div class="card-icon">⏰</div>
+    <div class="card-num">S5</div>
+    <div class="card-title">Cron 자동 알람</div>
+    <div class="card-desc">시스템 운영 + 셀프힐링</div>
+    <div class="card-meta">3 slides · 1 mermaid</div>
+  </div>
+
+  <div class="index-card" onclick="Reveal.slide(19)">
+    <div class="card-icon">🎯</div>
+    <div class="card-num">S6</div>
+    <div class="card-title">SSoT + Wiki 구조</div>
+    <div class="card-desc">단일 진실 + 7 submodule</div>
+    <div class="card-meta">3 slides · 2 mermaid</div>
+  </div>
+
+  <div class="index-card" onclick="Reveal.slide(22)">
+    <div class="card-icon">🔚</div>
+    <div class="card-num">S7</div>
+    <div class="card-title">Outro · Q&A</div>
+    <div class="card-desc">핵심 takeaway + 링크</div>
+    <div class="card-meta">3 slides · 0 mermaid</div>
+  </div>
+
+  <div class="index-card" onclick="Reveal.slide(0)">
+    <div class="card-icon">🏠</div>
+    <div class="card-num">S0</div>
+    <div class="card-title">← 처음으로</div>
+    <div class="card-desc">Title로 돌아가기</div>
+    <div class="card-meta">1 slide</div>
+  </div>
 
 </div>
 
+<p class="click-hint">💡 카드를 클릭하면 해당 섹션으로 이동 · 키보드 ← → 도 사용 가능</p>
+
 ---
 
-## 📑 목차
+## ⌨️ 키보드 단축키
 
-| # | 섹션 | 슬라이드 |
-|:-:|---|:-:|
-| S0 | Hero | 0.1 ~ 0.3 |
-| **S1** | **Hermes vs 챗봇** | 1.1 ~ 1.4 |
-| **S2** | **Hybrid AI Stack** | 2.1 ~ 2.4 |
-| **S3** | **Pipeline System** | 3.1 ~ 3.3 |
-| **S4** | **LangGraph 5단계** | 4.1 ~ 4.3 |
-| **S5** | **Cron Jobs** | 5.1 ~ 5.3 |
-| **S6** | **SSoT + Wiki** | 6.1 ~ 6.3 |
-| **S7** | **Outro** | 7.1 ~ 7.3 |
+| 키 | 동작 |
+|---|---|
+| `←` `→` | 슬라이드 이동 |
+| `↑` `↓` | Vertical 슬라이드 이동 |
+| `Space` | 다음 슬라이드 |
+| `ESC` | Overview (전체 보기) |
+| `F` | 풀스크린 |
+| `S` | 발표자 노트 |
+| `B` | 슬라이드 일시정지 (검은 화면) |
 
-**키보드**: `←` `→` 이동 · `ESC` overview · `F` 풀스크린
+<div class="tldr">
+
+**출처**: `mybotagent/hermes-wiki` (architecture/ + analysis/ + infra/ + repos/)
+
+</div>

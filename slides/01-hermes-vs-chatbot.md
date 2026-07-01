@@ -27,34 +27,34 @@
 
 ```mermaid
 flowchart TB
-    subgraph 장기["장기 (Long-term)"]
-        B["두뇌<br/>config"]
-        S["인격<br/>soul.md"]
-        M["기억<br/>memory + user"]
-        SK["업무 매뉴얼<br/>skill.md"]
+    subgraph longterm["장기 - Long-term"]
+        brain["두뇌<br/>config"]
+        soul["인격<br/>soul.md"]
+        memory["기억<br/>memory + user"]
+        skill["업무 매뉴얼<br/>skill.md"]
     end
 
-    subgraph 직원장치["직원화 장치"]
-        T["손발<br/>tools"]
-        C["채널<br/>20+ gateway"]
-        CR["알람<br/>cron"]
+    subgraph tools3["직원화 장치"]
+        hands["손발<br/>tools"]
+        channel["채널<br/>20+ gateway"]
+        alarm["알람<br/>cron"]
     end
 
-    U((사용자)) --> C
-    C --> B
-    B --> S
-    S --> M
-    M --> SK
-    SK --> T
-    CR -.자동 출근.-> B
-    T -.결과.-> U
+    user((사용자)) --> channel
+    channel --> brain
+    brain --> soul
+    soul --> memory
+    memory --> skill
+    skill --> hands
+    alarm -.자동 출근.-> brain
+    hands -.결과.-> user
 
-    style 장기 fill:#1a3a5c,stroke:#00d4ff,stroke-width:2px
-    style 직원장치 fill:#5c1a3a,stroke:#ff6b9d,stroke-width:2px
-    style B fill:#00d4ff,color:#000
-    style S fill:#00d4ff,color:#000
-    style M fill:#00d4ff,color:#000
-    style SK fill:#00d4ff,color:#000
+    style longterm fill:#1a3a5c,stroke:#00d4ff,stroke-width:2px
+    style tools3 fill:#5c1a3a,stroke:#ff6b9d,stroke-width:2px
+    style brain fill:#00d4ff,color:#000
+    style soul fill:#00d4ff,color:#000
+    style memory fill:#00d4ff,color:#000
+    style skill fill:#00d4ff,color:#000
 ```
 
 <div class="small">
@@ -69,21 +69,21 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    A["대화/작업"] --> B["수첩<br/>memory.md<br/>(상시 로드, 2KB)"]
-    A --> C["벡터 DB<br/>(필요시 검색)"]
+    work["대화/작업"] --> core["수첩<br/>memory.md<br/>(상시 로드, 2KB)"]
+    work --> vector["벡터 DB<br/>(필요시 검색)"]
 
-    B -->|"핵심만 유지"| D["다음 세션"]
-    C -->|"필요한 것만 꺼냄"| D
+    core -->|"핵심만 유지"| next["다음 세션"]
+    vector -->|"필요한 것만 꺼냄"| next
 
-    style B fill:#ffd93d,color:#000
-    style C fill:#00d4ff,color:#000
-    style D fill:#ff6b9d,color:#000
+    style core fill:#ffd93d,color:#000
+    style vector fill:#00d4ff,color:#000
+    style next fill:#ff6b9d,color:#000
 ```
 
 | 층위 | 저장소 | 로드 시점 | 용량 |
 |---|---|---|---|
 | **수첩** | `memory.md` + `user.md` | 매 세션 자동 | 2천자 (압축) |
-| **벡터** | OpenAI/Honcho | 필요시 검색 | 무제한 |
+| **벡터** | Honcho / pgvector | 필요시 검색 | 무제한 |
 
 <div class="small">
 
@@ -97,16 +97,16 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A["첫 실행<br/>시행착오"] --> B["성공"]
-    B --> C["skill.md<br/>자동 기록"]
-    C --> D["재실행<br/>매뉴얼 참조"]
-    D --> E["빠름"]
-    E --> F["더 많은 경험"]
-    F --> C
+    trial["첫 실행<br/>시행착오"] --> success["성공"]
+    success --> manual["skill.md<br/>자동 기록"]
+    manual --> fast["재실행<br/>매뉴얼 참조"]
+    fast --> speed["빠름"]
+    speed --> experience["더 많은 경험"]
+    experience --> manual
 
-    style A fill:#5c1a3a,stroke:#ff6b9d
-    style C fill:#1a3a5c,stroke:#00d4ff,stroke-width:3px
-    style E fill:#3a5c1a,stroke:#ffd93d
+    style trial fill:#5c1a3a,stroke:#ff6b9d
+    style manual fill:#1a3a5c,stroke:#00d4ff,stroke-width:3px
+    style speed fill:#3a5c1a,stroke:#ffd93d
 ```
 
 > 챗봇: 매번 0에서 출발

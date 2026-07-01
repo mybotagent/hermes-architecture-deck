@@ -191,3 +191,88 @@
   color: var(--hermes-accent);
   font-weight: 700;
 }
+
+/* 카드형 인덱스 (Hero 첫 화면) */
+.reveal .index-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8em;
+  margin: 1em 0;
+}
+
+.reveal .index-card {
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid var(--hermes-primary);
+  border-radius: 12px;
+  padding: 1em 0.6em;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reveal .index-card:hover {
+  background: rgba(0, 212, 255, 0.22);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 212, 255, 0.4);
+  border-color: var(--hermes-accent);
+}
+
+.reveal .index-card .card-icon {
+  font-size: 2.2em;
+  margin-bottom: 0.2em;
+  line-height: 1;
+}
+
+.reveal .index-card .card-num {
+  color: var(--hermes-accent);
+  font-weight: 700;
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  margin-top: 0.3em;
+}
+
+.reveal .index-card .card-title {
+  color: var(--hermes-text);
+  font-size: 0.8em;
+  margin: 0.4em 0;
+  font-weight: 600;
+}
+
+.reveal .index-card .card-desc {
+  color: var(--hermes-dim);
+  font-size: 0.55em;
+  margin-top: 0.3em;
+  font-style: italic;
+}
+
+.reveal .index-card .card-meta {
+  color: var(--hermes-secondary);
+  font-size: 0.5em;
+  margin-top: 0.5em;
+  font-weight: 600;
+}
+
+/* Hero 타이틀 */
+.reveal .hero-title {
+  font-size: 2.6em !important;
+  margin-bottom: 0.2em;
+}
+
+.reveal .hero-sub {
+  font-size: 1em;
+  color: var(--hermes-dim);
+  margin-top: 0;
+  margin-bottom: 1.2em;
+}
+
+/* 클릭 힌트 */
+.reveal .click-hint {
+  font-size: 0.5em;
+  color: var(--hermes-dim);
+  margin-top: 0.6em;
+  font-style: italic;
+}

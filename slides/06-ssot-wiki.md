@@ -8,36 +8,36 @@
 
 ```mermaid
 flowchart TB
-    SSoT["SSoT<br/>단일 진실 공급원"]
+    ssot["SSoT<br/>단일 진실 공급원"]
 
-    SSoT --> C1["Centralization<br/>분산 데이터를 단일 플랫폼에 통합"]
-    SSoT --> C2["Consistency<br/>수정이 전체에 동시 반영"]
-    SSoT --> C3["Integrity<br/>언제든 동일한 기준으로 접근"]
-    SSoT --> C4["Accurate Decision<br/>의사결정 속도·정확도 동시 상승"]
+    ssot --> c1["Centralization<br/>분산 데이터를 단일 플랫폼에 통합"]
+    ssot --> c2["Consistency<br/>수정이 전체에 동시 반영"]
+    ssot --> c3["Integrity<br/>언제든 동일한 기준으로 접근"]
+    ssot --> c4["Accurate Decision<br/>의사결정 속도·정확도 동시 상승"]
 
-    style SSoT fill:#5c1a5c,stroke:#a855f7,stroke-width:4px
-    style C1 fill:#1a3a5c,stroke:#00d4ff
-    style C2 fill:#3a5c1a,stroke:#ffd93d
-    style C3 fill:#5c3a1a,stroke:#ff8c00
-    style C4 fill:#5c1a3a,stroke:#ff6b9d
+    style ssot fill:#5c1a5c,stroke:#a855f7,stroke-width:4px
+    style c1 fill:#1a3a5c,stroke:#00d4ff
+    style c2 fill:#3a5c1a,stroke:#ffd93d
+    style c3 fill:#5c3a1a,stroke:#ff8c00
+    style c4 fill:#5c1a3a,stroke:#ff6b9d
 ```
 
 ---
 
-## HR 데이터가 SSoT 중심인 이유
+## 데이터 계층이 SSoT 중심인 이유
 
-> 매출·생산성 = 결과만 보여줌
-> **원인(조직 개편, 인력 변화)** = HR 데이터에 있음
+> 결과 지표(매출·생산성)만으로는 "무엇이 일어났는지"만 알려줌
+> **맥락(구조·관계·역사)** 이 있어야 "왜"를 알 수 있다
 
 | 데이터 종류 | 보여주는 것 | 못 보여주는 것 |
 |---|---|---|
-| 매출/생산성 | 결과 | 원인 |
-| HR 데이터 | 맥락·관계 | 정량 지표 |
-| **SSoT (HR 중심)** | **원인-결과 통합** | — |
+| 정량 지표 | 결과 | 원인 |
+| 메타데이터 | 맥락·관계 | 정량 수치 |
+| **SSoT (계층 통합)** | **원인-결과 통합** | — |
 
 <div class="small">
 
-⚠️ **협업툴≠SSoT 함정**: Notion·Slack·Docs는 이벤트 로그만 남기고 HR 맥락이 없음 → 판단 근거로 작동 못함
+⚠️ **협업툴≠SSoT 함정**: Notion·Slack·Docs는 이벤트 로그만 남기고 계층 맥락이 없음 → 판단 근거로 작동 못함
 
 </div>
 
@@ -47,24 +47,24 @@ flowchart TB
 
 ```mermaid
 graph TD
-    SUPER["hermes-wiki-super<br/>(super repo)"]
+    super["hermes-wiki-super<br/>(super repo)"]
 
-    SUPER --> W1["hermes-wiki<br/>(Index + 운영)"]
-    SUPER --> W2["hermes-wiki-claude-code"]
-    SUPER --> W3["hermes-wiki-codex"]
-    SUPER --> W4["hermes-wiki-schedule"]
-    SUPER --> W5["hermes-wiki-portfolio"]
-    SUPER --> W6["hermes-slash-commands"]
-    SUPER --> W7["hermes-logs<br/>(변경 이력)"]
+    super --> w1["hermes-wiki<br/>(Index + 운영)"]
+    super --> w2["hermes-wiki-claude-code"]
+    super --> w3["hermes-wiki-codex"]
+    super --> w4["hermes-wiki-schedule"]
+    super --> w5["hermes-wiki-portfolio"]
+    super --> w6["hermes-slash-commands"]
+    super --> w7["hermes-logs<br/>(변경 이력)"]
 
-    W1 --> R1["architecture/"]
-    W1 --> R2["analysis/"]
-    W1 --> R3["infra/"]
-    W1 --> R4["watchlist/"]
+    w1 --> a1["architecture/"]
+    w1 --> a2["analysis/"]
+    w1 --> a3["infra/"]
+    w1 --> a4["watchlist/"]
 
-    style SUPER fill:#5c1a5c,stroke:#a855f7,stroke-width:4px
-    style W1 fill:#1a3a5c,stroke:#00d4ff
-    style W7 fill:#5c1a3a,stroke:#ff6b9d
+    style super fill:#5c1a5c,stroke:#a855f7,stroke-width:4px
+    style w1 fill:#1a3a5c,stroke:#00d4ff
+    style w7 fill:#5c1a3a,stroke:#ff6b9d
 ```
 
 <div class="small">
