@@ -1,13 +1,8 @@
 # How We Run It
 
-<p>The seven components, in production. What each one does, what files back it, and what we observed after months of use.</p>
-
 ---
 
 # Brain
-
-<p>The Brain is the only replaceable piece. Everything below it survives a swap.</p>
-
 <pre><code># config — the Brain
 model: deepseek-chat
 temperature: 0.3
@@ -28,9 +23,6 @@ fallback_chain:
 ---
 
 # Soul
-
-<p>The persona lives in <code>soul.md</code>. It is not the system prompt — the system prompt changes with the Brain. The Soul is what stays across swaps.</p>
-
 <pre><code># soul.md — persona and rules of engagement
 
 ## identity
@@ -54,9 +46,6 @@ fallback_chain:
 ---
 
 # Memory
-
-<p>One layer. The notebook. It is loaded every turn and compressed when it grows past 2KB.</p>
-
 <pre><code># user.md (excerpt — actual file is 1,847 chars)
 - prefers value investing, single-position sizing 0–20%
 - trades US + KR markets, no crypto, no leveraged ETFs
@@ -70,9 +59,6 @@ fallback_chain:
 ---
 
 # Manual
-
-<p><code>skill.md</code> is the engine of compounding. Every successful workflow writes a procedure here; the next time, the procedure is read instead of rediscovered.</p>
-
 <div style="text-align:center; margin:1em 0;">
 
 <p><img src="../../assets/img/compound-loop.svg" alt="Skill compound loop: ① run → ② manual written → ③ faster, then ④ more experience loops back to ②" style="max-width:100%;height:auto;"></p>
@@ -94,9 +80,6 @@ fallback_chain:
 ---
 
 # Hands, Channel, Alarm
-
-<p>The three employee-ization devices, working together.</p>
-
 <table>
 <thead>
 <tr><th>Device</th><th>Backing</th><th>What it actually does</th></tr>
@@ -119,9 +102,6 @@ fallback_chain:
 ---
 
 # The Compound Effect
-
-<p>Three loops, all writing back to the long-term organs.</p>
-
 <p><img src="../../assets/img/three-loops.svg" alt="Three compound loops: Loop 1 Manual (workflow run → procedure written → next run faster), Loop 2 Memory (session ends → notebook updated → next turn warmer), Loop 3 Pipeline (monthly review → past calls analysed → prompts sharper)" style="max-width:100%;height:auto;"></p>
 
 <p>After three months the system runs materially faster on the same inputs — not because the Brain got smarter, but because everything around the Brain got tighter. The Manual is shorter to read. The Memory is already pointed at the right thing. The Pipeline's prompts are sharper.</p>
@@ -147,8 +127,6 @@ fallback_chain:
 </tbody>
 </table>
 
-<p>Six of seven components were exercised to produce this artifact. The seventh is reserved for the next batch.</p>
-
 ---
 
 # Discord Three-Way Meeting
@@ -162,9 +140,6 @@ fallback_chain:
 </ul>
 
 <h3>The flow</h3>
-
-<p><img src="../../assets/img/discord-three-way.svg" alt="Discord three-way meeting — User → Discord thread → Hermes orchestrator → dispatch to Claude Bot A (Plannerbot) and Claude Bot B (Verifierbot) → Synthesize → User" style="max-width:100%;height:auto;"></p>
-
 <h3>When each bot speaks</h3>
 
 <table>
@@ -185,9 +160,6 @@ fallback_chain:
 ---
 
 # Linear + Hermes Kanban
-
-<p>Linear is the source of truth for tickets across the team. Hermes Kanban is the local mirror we touch. They sync both directions via webhooks.</p>
-
 <h3>The topology</h3>
 
 <p><img src="../../assets/img/linear-kanban-sync.svg" alt="Linear ↔ Hermes Kanban bidirectional webhook sync — issue / status / comment events in both directions, field-level conflict resolution" style="max-width:100%;height:auto;"></p>
