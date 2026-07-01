@@ -32,18 +32,24 @@
 
 .reveal .slides > section {
   text-align: left;
-  padding: 1.5em 2.5em;
+  padding: 0.8em 1.8em;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
+
+.reveal .slides > section > * { max-width: 100%; }
 
 /* Apple typography hierarchy */
 .reveal h1 {
   font-family: "SF Pro Display", system-ui, sans-serif;
-  font-size: 3.2em;
+  font-size: 2.6em;
   font-weight: 600;
   line-height: 1.05;
   letter-spacing: -0.035em;
   color: var(--apple-body-on-dark);
   text-transform: none;
+  margin: 0 0 0.3em 0;
 }
 
 .reveal h1 em {
