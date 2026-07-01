@@ -75,14 +75,7 @@ fallback_chain:
 
 <div style="text-align:center; margin:1em 0;">
 
-1. workflow run
-   →
-2. procedure written to skill.md
-   →
-3. next run reads it (faster)
-   ↑
-4. more experience
-   → loops back to 2
+<p><img src="../../assets/img/compound-loop.svg" alt="Skill compound loop: ① run → ② manual written → ③ faster, then ④ more experience loops back to ②" style="max-width:100%;height:auto;"></p>
 
 </div>
 
@@ -129,18 +122,7 @@ fallback_chain:
 
 <p>Three loops, all writing back to the long-term organs.</p>
 
-<div style="text-align:center; margin:1em 0;">
-
-<strong>Loop 1 · Manual</strong>
-workflow run → procedure written → next run faster
-
-<strong>Loop 2 · Memory</strong>
-session ends → notebook updated → next turn starts warmer
-
-<strong>Loop 3 · Pipeline</strong>
-monthly review → past calls analysed → prompts refined
-
-</div>
+<p><img src="../../assets/img/three-loops.svg" alt="Three compound loops: Loop 1 Manual (workflow run → procedure written → next run faster), Loop 2 Memory (session ends → notebook updated → next turn warmer), Loop 3 Pipeline (monthly review → past calls analysed → prompts sharper)" style="max-width:100%;height:auto;"></p>
 
 <p>After three months the system runs materially faster on the same inputs — not because the Brain got smarter, but because everything around the Brain got tighter. The Manual is shorter to read. The Memory is already pointed at the right thing. The Pipeline's prompts are sharper.</p>
 
@@ -169,33 +151,7 @@ monthly review → past calls analysed → prompts refined
 
 ---
 
-# Links
-
-<div style="text-align:center; margin:1em 0;">
-
-**Live deck**
-
-`https://org-a.example.io/project-a/decks/hermes-architecture/`
-
-**Knowledge**
-
-- project-i — operational wiki
-- project-b — super-repo, all submodules
-- project-h — change logs
-
-**Code**
-
-- project-j — pipeline + cron runners
-
-**This portfolio**
-
-- project-a — repo + Pages
-
-</div>
-
 # Discord Three-Way Meeting
-
-<p>Three bots share one Discord thread. The user posts once; they figure out who does what.</p>
 
 <h3>The cast</h3>
 
