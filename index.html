@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hermes 시스템 해부 — Architecture Deck</title>
+  <meta name="description" content="Hermes Agent 시스템 아키텍처를 mermaid 다이어그램과 함께 풀어내는 슬라이드 덱">
+  <meta name="author" content="Hermes Agent">
+
+  <!-- Reveal.js 5.x (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="assets/css/custom.css">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Section 0: Hero -->
+      <section data-markdown="slides/00-hero.md"
+               data-separator="^---$"
+               data-separator-vertical="^----$"
+               data-separator-notes="^Note:">
+      </section>
+
+      <!-- Section 1: Hermes vs 챗봇 -->
+      <section data-markdown="slides/01-hermes-vs-chatbot.md"
+               data-separator="^---$"
+               data-separator-vertical="^----$"
+               data-separator-notes="^Note:">
+      </section>
+
+      <!-- Section 2: Hybrid AI Stack -->
+      <section data-markdown="slides/02-hybrid-stack.md"
+               data-separator="^---$"
+               data-separator-vertical="^----$"
+               data-separator-notes="^Note:">
+      </section>
+
+      <!-- Section 3: Pipeline -->
+      <section data-markdown="slides/03-pipeline.md"
+               data-separator="^---$"
+               data-separator-vertical="^----$"
+               data-separator-notes="^Note:">
+      </section>
+
+      <!-- Section 4: LangGraph -->
+      <section data-markdown="slides/04-langgraph.md"
+               data-separator="^---$"
+               data-separator-vertical="^----$"
+               data-separator-notes="^Note:">
+      </section>
+
+      <!-- Section 5: Cron Jobs -->
+      <section data-markdown="slides/05-cron.md"
+               data-separator="^---$"
+               data-separator-vertical="^----$"
+               data-separator-notes="^Note:">
+      </section>
+
+      <!-- Section 6: SSoT + Wiki Super -->
+      <section data-markdown="slides/06-ssot-wiki.md"
+               data-separator="^---$"
+               data-separator-vertical="^----$"
+               data-separator-notes="^Note:">
+      </section>
+
+      <!-- Section 7: Outro -->
+      <section data-markdown="slides/99-outro.md"
+               data-separator="^---$"
+               data-separator-vertical="^----$"
+               data-separator-notes="^Note:">
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+
+  <!-- mermaid.js (ESM) -->
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      securityLevel: 'loose',
+      fontFamily: 'system-ui, sans-serif',
+      flowchart: { curve: 'basis', padding: 10 },
+      gantt: { useMaxWidth: true }
+    });
+
+    // Reveal ready 후 ```mermaid 블록을 mermaid로 렌더
+    const renderMermaid = async () => {
+      // markdown plugin이 변환한 <pre><code class="language-mermaid"> 찾기
+      const codes = document.querySelectorAll('.reveal pre code.language-mermaid');
+      for (let i = 0; i < codes.length; i++) {
+        const code = codes[i];
+        const pre = code.parentElement;
+        const source = code.textContent;
+        const div = document.createElement('div');
+        div.className = 'mermaid';
+        div.textContent = source;
+        div.id = `mermaid-graph-${i}`;
+        pre.replaceWith(div);
+      }
+      try {
+        await mermaid.run({ querySelector: '.mermaid' });
+      } catch (err) {
+        console.error('Mermaid render error:', err);
+      }
+    };
+
+    Reveal.on('ready', renderMermaid);
+    Reveal.on('slidechanged', renderMermaid);
+
+    Reveal.initialize({
+      hash: true,
+      controls: true,
+      progress: true,
+      slideNumber: 'c/t',
+      overview: true,
+      center: true,
+      transition: 'slide',
+      transitionSpeed: 'fast',
+      plugins: [ RevealMarkdown, RevealNotes, RevealHighlight ],
+      markdown: {
+        smartypants: false,
+        gfm: true
+      }
+    });
+  </script>
+</body>
+</html>

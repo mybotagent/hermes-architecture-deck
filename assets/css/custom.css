@@ -1,0 +1,193 @@
+/* Hermes Architecture Deck — Custom Styles */
+
+:root {
+  --hermes-primary: #00d4ff;     /* 시안 */
+  --hermes-secondary: #ff6b9d;   /* 핑크 */
+  --hermes-accent: #ffd93d;      /* 옐로우 */
+  --hermes-bg: #0a0e27;          /* 딥 네이비 */
+  --hermes-text: #e8eaf6;
+  --hermes-dim: #8b92b8;
+}
+
+.reveal {
+  font-family: 'Pretendard', 'Inter', 'Helvetica Neue', sans-serif;
+  background: var(--hermes-bg);
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+  color: var(--hermes-primary);
+  text-transform: none;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.reveal h1 {
+  font-size: 2.4em;
+  background: linear-gradient(135deg, var(--hermes-primary), var(--hermes-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.reveal h2 {
+  font-size: 1.6em;
+  border-bottom: 3px solid var(--hermes-primary);
+  padding-bottom: 0.2em;
+  margin-bottom: 0.6em;
+}
+
+.reveal h3 {
+  font-size: 1.2em;
+  color: var(--hermes-accent);
+}
+
+.reveal p, .reveal li {
+  color: var(--hermes-text);
+  font-size: 0.7em;
+  line-height: 1.5;
+}
+
+.reveal strong {
+  color: var(--hermes-accent);
+  font-weight: 600;
+}
+
+.reveal em {
+  color: var(--hermes-secondary);
+}
+
+.reveal code {
+  background: rgba(0, 212, 255, 0.1);
+  color: var(--hermes-primary);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+.reveal pre {
+  width: 100%;
+  background: #1a1e3a;
+  border-left: 4px solid var(--hermes-primary);
+  border-radius: 6px;
+  font-size: 0.55em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.reveal pre code {
+  background: transparent;
+  color: var(--hermes-text);
+  padding: 0.8em;
+  max-height: 600px;
+}
+
+.reveal table {
+  font-size: 0.55em;
+  border-collapse: collapse;
+  margin: 1em 0;
+  width: 100%;
+}
+
+.reveal table th {
+  background: var(--hermes-primary);
+  color: var(--hermes-bg);
+  padding: 0.4em 0.6em;
+  text-align: left;
+  font-weight: 700;
+}
+
+.reveal table td {
+  padding: 0.3em 0.6em;
+  border-bottom: 1px solid rgba(139, 146, 184, 0.2);
+}
+
+.reveal table tr:nth-child(even) {
+  background: rgba(0, 212, 255, 0.05);
+}
+
+/* mermaid 다이어그램 */
+.mermaid {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1em;
+  margin: 1em 0;
+  display: flex;
+  justify-content: center;
+  max-height: 600px;
+  overflow: auto;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Title 슬라이드 특별 */
+.reveal section[data-background] h1 {
+  font-size: 2.8em;
+}
+
+/* 키보드 네비 힌트 */
+.reveal .controls {
+  color: var(--hermes-primary);
+}
+
+/* Slide number 스타일 */
+.reveal .slide-number {
+  background: var(--hermes-primary);
+  color: var(--hermes-bg);
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.5em;
+}
+
+/* 인용구 */
+.reveal blockquote {
+  background: rgba(0, 212, 255, 0.08);
+  border-left: 4px solid var(--hermes-accent);
+  padding: 0.8em 1.2em;
+  font-style: italic;
+  color: var(--hermes-text);
+  font-size: 0.7em;
+}
+
+/* 작은 글자 (각주, 디테일) */
+.reveal .small {
+  font-size: 0.5em;
+  color: var(--hermes-dim);
+}
+
+/* 페이지 번호 footer */
+.reveal .footer {
+  position: absolute;
+  bottom: 12px;
+  left: 20px;
+  font-size: 0.4em;
+  color: var(--hermes-dim);
+  z-index: 1;
+}
+
+/* TL;DR 박스 */
+.reveal .tldr {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 107, 157, 0.1));
+  border: 1px solid var(--hermes-primary);
+  border-radius: 8px;
+  padding: 1em 1.5em;
+  margin: 1em 0;
+}
+
+.reveal .tldr h3 {
+  margin-top: 0;
+  color: var(--hermes-primary);
+}
+
+/* 큰 글자 강조 */
+.reveal .big {
+  font-size: 1.4em;
+  color: var(--hermes-accent);
+  font-weight: 700;
+}
