@@ -1,80 +1,35 @@
-# Hermes — How We Use It
+# How We Run It
 
-<p class="small">A walkthrough of the seven components in production. What they do, how they're configured, and the compound they generate.</p>
-
----
-
-# The Whole System
-
-<div class="flow-chart">
-
-<div class="flow-row">
- <div class="flow-node simple"><span class="node-label"> User</span></div>
-</div>
-<div class="flow-arrow"></div>
-<div class="flow-row">
- <div class="flow-node tooling"><span class="node-label"> Channel</span><span class="node-sub">Discord gateway</span></div>
-</div>
-<div class="flow-arrow"></div>
-
-<div class="flow-group">
- <span class="flow-group-label">Long-term Organs — configured once, survive every brain swap</span>
-<div class="flow-row">
- <div class="flow-node long-term"><span class="node-label"> Brain</span><span class="node-sub">config</span></div>
- <div class="flow-arrow right"></div>
- <div class="flow-node long-term"><span class="node-label"> Soul</span><span class="node-sub">soul.md</span></div>
- <div class="flow-arrow right"></div>
- <div class="flow-node long-term"><span class="node-label"> Memory</span><span class="node-sub">memory + user</span></div>
- <div class="flow-arrow right"></div>
- <div class="flow-node long-term"><span class="node-label"> Manual</span><span class="node-sub">skill.md</span></div>
-</div>
-</div>
-
-<div class="flow-arrow"></div>
-<div class="flow-row">
- <div class="flow-node tooling"><span class="node-label"> Hands</span><span class="node-sub">20+ tools</span></div>
-</div>
-<div class="flow-arrow"></div>
-<div class="flow-row">
- <div class="flow-node simple"><span class="node-label"> User</span></div>
-</div>
-
-<div class="flow-arrow"></div>
-<div class="flow-row">
- <div class="flow-node compute"><span class="node-label">⏰ Alarm</span><span class="node-sub">cron auto-wakes Brain</span></div>
-</div>
-
-</div>
-
-<div class="small">Everything below zooms into one piece at a time. The wiring stays the same; the depth changes.</div>
+<p>The seven components, in production. What each one does, what files back it, and what we observed after months of use.</p>
 
 ---
 
-# Brain in Production
+# Brain
 
-<p>Our <code>config</code> pins down the AI model and the operational parameters. The Brain is the only piece we hot-swap; everything else below it stays put.</p>
+<p>The Brain is the only replaceable piece. Everything below it survives a swap.</p>
 
-<pre><code># brain — AI model configuration
+<pre><code># config — the Brain
 model: deepseek-chat
 temperature: 0.3
 max_tokens: 4096
-fallback_chain:
- - claude-sonnet-4.5
- - gpt-5
- - gemini-2.5-pro
 
-# swap history (last 6 months)
+fallback_chain:
+  - claude-sonnet-4.5
+  - gpt-5
+  - gemini-2.5-pro
+
+# swap history (last six months)
 - 2026-01 .. 2026-04 → claude-sonnet-4.5
 - 2026-05 .. 2026-06 → gpt-5
-- 2026-07 .. now → deepseek-chat (cost + latency)</code></pre>
+- 2026-07 .. now      → deepseek-chat  (cost + latency)</code></pre>
 
-<p>The fallback chain is the part that matters: when the primary model degrades or is unavailable, the Brain rolls over without losing <strong>Memory</strong>, <strong>Soul</strong>, or <strong>Manual</strong>.</p>
+<p>The fallback chain is what matters. When the primary model degrades, the Brain rolls over without losing Memory, Soul, or Manual. Three swaps in six months, none of them user-visible beyond a slight tone shift on the first few responses after each swap.</p>
 
 ---
 
-# Soul in Production
+# Soul
 
-<p>The persona lives in <code>soul.md</code>. It's not the system prompt — those change with the Brain. The Soul is what stays.</p>
+<p>The persona lives in <code>soul.md</code>. It is not the system prompt — the system prompt changes with the Brain. The Soul is what stays across swaps.</p>
 
 <pre><code># soul.md — persona and rules of engagement
 
@@ -94,21 +49,13 @@ fallback_chain:
 - when the data is ambiguous, surface the ambiguity
 - when the user hasn't asked, don't volunteer</code></pre>
 
-<p>The Soul has been edited seven times in the last quarter. Each edit is a small behavioural calibration, not a rewrite. The audit trail lives in <code>project-h</code>.</p>
+<p>Edited seven times in the last quarter. Each edit is a small behavioural calibration, not a rewrite. The audit trail lives in the change log.</p>
 
 ---
 
-# Memory in Production
+# Memory
 
-<p>Two layers, both actively used.</p>
-
-<div class="flow-chart">
-<div class="flow-row">
-<div class="flow-node data"><span class="node-label"> Notebook</span><span class="node-sub">memory.md + user.md</span><span class="node-sub">2KB · always loaded</span></div>
-<div class="flow-arrow right"></div>
-<div class="flow-node data"><span class="node-label"> Vector store</span><span class="node-sub">Honcho / pgvector</span><span class="node-sub">unlimited · on demand</span></div>
-</div>
-</div>
+<p>One layer. The notebook. It is loaded every turn and compressed when it grows past 2KB.</p>
 
 <pre><code># user.md (excerpt — actual file is 1,847 chars)
 - prefers value investing, single-position sizing 0–20%
@@ -118,35 +65,32 @@ fallback_chain:
 - timezone: Asia/Seoul, working hours 09:00–18:00 KST
 - has a Korail-style ticker naming preference (alphabetic)</code></pre>
 
-<p>Honcho runs end-of-session: it digests the conversation, infers preferences the user never stated, and writes them back. The Notebook is what loads every turn. The Vector store is what loads when the Notebook says "look this up".</p>
+<p>The notebook holds preferences the user has stated, preferences we have inferred, and operational facts (timezone, working hours, deliver format). It is the only Memory the Brain reads every turn. There is no second layer.</p>
 
 ---
 
-# Manual in Production
+# Manual
 
 <p><code>skill.md</code> is the engine of compounding. Every successful workflow writes a procedure here; the next time, the procedure is read instead of rediscovered.</p>
 
-<div class="flow-chart">
-<div class="flow-row">
-<div class="flow-node simple">① run workflow</div>
-<div class="flow-arrow right"></div>
-<div class="flow-node data">② write procedure to skill.md</div>
-<div class="flow-arrow right"></div>
-<div class="flow-node output">③ next run reads it → faster</div>
-</div>
-<div class="flow-arrow"></div>
-<div class="flow-row">
-<div class="flow-node simple">④ more experience</div>
-<div class="flow-arrow up"></div>
-<div class="flow-node data">back to ②</div>
-</div>
+<div style="text-align:center; margin:1em 0;">
+
+1. workflow run
+   →
+2. procedure written to skill.md
+   →
+3. next run reads it (faster)
+   ↑
+4. more experience
+   → loops back to 2
+
 </div>
 
-<p><strong>Concrete example</strong> — this very deck started as a skill.md procedure:</p>
+<p><strong>Concrete example</strong> — this very deck started as a skill procedure:</p>
 
 <pre><code># skills/wikihow-to-deck.md
 1. take wiki section (h1 + paragraphs)
-2. extract mermaid blocks → render to PNG via mmdc
+2. extract flow blocks → render as HTML/CSS divs
 3. apply Apple design tokens (SF Pro, Action Blue, white bg)
 4. write Reveal.js deck with inline CSS
 5. deploy to github.io via git push
@@ -156,178 +100,68 @@ fallback_chain:
 
 ---
 
-# Hands in Production
+# Hands, Channel, Alarm
 
-<p>Four tool families, each used daily.</p>
-
-<table>
-<thead>
-<tr><th>Family</th><th>What it does</th><th>Used for</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>Terminal</strong></td><td>shell exec, scripts, git, curl</td><td>cron jobs, file ops, repo syncs</td></tr>
-<tr><td><strong>File</strong></td><td>read/write markdown, JSON, YAML</td><td>wiki edits, config updates, log writes</td></tr>
-<tr><td><strong>Web</strong></td><td>search, fetch, scrape</td><td>news briefings, market data, doc lookup</td></tr>
-<tr><td><strong>Delegate</strong></td><td>spawn Claude Code / Codex subagents</td><td>deep code work, large refactors</td></tr>
-</tbody>
-</table>
-
-<p>The four families are wired through <code>tools</code> in the config — each one is a function the Brain can call. When a workflow needs more than one, they chain:</p>
-
-<div class="flow-chart">
-<div class="flow-row">
-<div class="flow-node simple">fetch news</div>
-<div class="flow-arrow right"></div>
-<div class="flow-node data">summarize via Ollama</div>
-<div class="flow-arrow right"></div>
-<div class="flow-node output">write to Obsidian</div>
-</div>
-</div>
-
----
-
-# Channel in Production
-
-<p>The Discord gateway is the front door. One bot, one user, three active channels.</p>
+<p>The three employee-ization devices, working together.</p>
 
 <table>
 <thead>
-<tr><th>Channel</th><th>Purpose</th><th>Cron?</th></tr>
+<tr><th>Device</th><th>Backing</th><th>What it actually does</th></tr>
 </thead>
 <tbody>
-<tr><td><code>#portfolio</code></td><td>daily portfolio report at 08:10 KST</td><td>yes</td></tr>
-<tr><td><code>#briefing</code></td><td>US market close briefing at 19:00 KST</td><td>yes</td></tr>
-<tr><td><code>#knowledge</code></td><td>direct conversation, ad-hoc threads</td><td>no</td></tr>
+<tr><td><strong>Hands</strong></td><td><code>tools</code> in config</td><td>terminal (shell, git, curl), file (read/write md/json/yaml), web (search, fetch), delegate (spawn subagent for deep work)</td></tr>
+<tr><td><strong>Channel</strong></td><td>Discord gateway</td><td>One bot, one user, three active channels. Every cron job uses <code>deliver: "origin"</code> after the Home-channel 404 incident.</td></tr>
+<tr><td><strong>Alarm</strong></td><td>cron</td><td>Eight jobs on weekdays. Each one wakes the Brain with a fresh context, runs the workflow, reports back, and the Brain goes back to sleep.</td></tr>
 </tbody>
 </table>
 
-<p>Every cron job uses <code>deliver: "origin"</code> for routing — the webhook default caused three consecutive 404s on the Home channel, which is what prompted the self-healing watchdog.</p>
+<pre><code># /etc/cron.d/the-assistant
+30 20 * * 1-5  run briefing_macro.py
+35 20 * * 1-5  run langgraph_pipeline.py
+ 0 23 * * 1-5  run backup_housekeeping.py
+ 0  4 * * 1-5  bash scripts/wiki_sync.sh</code></pre>
+
+<p>The Hands+Channel+Alarm trio is what turns the long-term organs into a working employee instead of a brain in a jar.</p>
 
 ---
 
-# ⏰ Alarm in Production
+# The Compound Effect
 
-<p>Eight cron jobs run on weekdays. Five more run weekly or monthly.</p>
+<p>Three loops, all writing back to the long-term organs.</p>
 
-<div class="flow-chart">
-<div class="flow-row">
-<div class="flow-node compute"><span class="node-label">⏰ 05:00 KST</span><span class="node-sub">wiki sync</span></div>
-<div class="flow-arrow right"></div>
-<div class="flow-node compute"><span class="node-label">⏰ 08:00</span><span class="node-sub">calendar digest</span></div>
-<div class="flow-arrow right"></div>
-<div class="flow-node compute"><span class="node-label">⏰ 08:10</span><span class="node-sub">morning portfolio</span></div>
-<div class="flow-arrow right"></div>
-<div class="flow-node compute"><span class="node-label">⏰ 18:35</span><span class="node-sub">analysis chain</span></div>
-<div class="flow-arrow right"></div>
-<div class="flow-node compute"><span class="node-label">⏰ 23:30</span><span class="node-sub">backup</span></div>
+<div style="text-align:center; margin:1em 0;">
+
+<strong>Loop 1 · Manual</strong>
+workflow run → procedure written → next run faster
+
+<strong>Loop 2 · Memory</strong>
+session ends → notebook updated → next turn starts warmer
+
+<strong>Loop 3 · Pipeline</strong>
+monthly review → past calls analysed → prompts refined
+
 </div>
-</div>
 
-<p>Each job triggers the Brain with a fresh context, runs the chain, and reports back. The Brain doesn't sit idle waiting — it gets woken, works, reports, and goes back to sleep.</p>
+<p>After three months the system runs materially faster on the same inputs — not because the Brain got smarter, but because everything around the Brain got tighter. The Manual is shorter to read. The Memory is already pointed at the right thing. The Pipeline's prompts are sharper.</p>
 
-<pre><code># /etc/cron.d/hermes
-30 20 * * 1-5 hermes-agent run briefing_macro.py
-35 20 * * 1-5 hermes-agent run langgraph_pipeline.py
-0 23 * * 1-5 hermes-agent run backup_housekeeping.py
-0 4 * * 1-5 bash /home/hermes/scripts/wiki_sync.sh</code></pre>
+<p>The compound is in the file system, not in the model weights.</p>
 
 ---
 
-# The Three Compound Loops
-
-<p>Every long-term organ is fed by a loop. The loops are what make the system compound instead of stagnate.</p>
-
-<div class="flow-chart">
-
-<div class="flow-group">
-<span class="flow-group-label">Loop 1 · Skill Compound</span>
-<div class="flow-row">
-<div class="flow-node simple">workflow run</div>
-<div class="flow-arrow right"></div>
-<div class="flow-node data">procedure written</div>
-<div class="flow-arrow right"></div>
-<div class="flow-node output">next run is faster</div>
-</div>
-</div>
-
-<div class="flow-arrow"></div>
-
-<div class="flow-group">
-<span class="flow-group-label">Loop 2 · Memory Compound</span>
-<div class="flow-row">
-<div class="flow-node simple">session ends</div>
-<div class="flow-arrow right"></div>
-<div class="flow-node data">Honcho digests</div>
-<div class="flow-arrow right"></div>
-<div class="flow-node output">preferences written</div>
-</div>
-</div>
-
-<div class="flow-arrow"></div>
-
-<div class="flow-group">
-<span class="flow-group-label">Loop 3 · Pipeline Compound</span>
-<div class="flow-row">
-<div class="flow-node simple">monthly review</div>
-<div class="flow-arrow right"></div>
-<div class="flow-node data">analysis of past calls</div>
-<div class="flow-arrow right"></div>
-<div class="flow-node output">prompts refined</div>
-</div>
-</div>
-
-</div>
-
-<p>All three loops write back to long-term organs. After three months the system runs materially faster on the same inputs — not because the Brain got smarter, but because everything around the Brain got tighter.</p>
-
----
-
-# Wiki SSoT in Practice
-
-<p><code>project-i</code> is the single source of truth. <code>INDEX.md</code> is the entry point. Every page has <code>related:</code> frontmatter that the Brain follows to walk the graph.</p>
-
-<div class="flow-chart">
-<div class="flow-row">
-<div class="flow-node long-term"><span class="node-label"> project-i</span><span class="node-sub">SSoT index</span></div>
-</div>
-<div class="flow-arrow"></div>
-
-<div class="flow-row">
-<div class="flow-node data"><span class="node-label">INDEX.md</span><span class="node-sub">all pages · 1-line desc</span></div>
-</div>
-<div class="flow-arrow"></div>
-
-<div class="flow-row">
-<div class="flow-node simple"><span class="node-label">architecture/</span></div>
-<div class="flow-node simple"><span class="node-label">analysis/</span></div>
-<div class="flow-node simple"><span class="node-label">infra/</span></div>
-<div class="flow-node simple"><span class="node-label">watchlist/</span></div>
-<div class="flow-node simple"><span class="node-label">repos/</span></div>
-<div class="flow-node simple"><span class="node-label">people/</span></div>
-</div>
-
-</div>
-
-<p>When we ask the Brain a question about how a cron job works, it follows the chain: <code>INDEX.md → infra/cron-jobs.md → related: analysis/langgraph-pipeline.md</code>. The wiki isn't decoration — it's the actual retrieval substrate.</p>
-
----
-
-# What This Deck Is
-
-<p>This deck itself is a worked example of every component above. The components it exercises:</p>
+# What This Deck Used
 
 <table>
 <thead>
 <tr><th>Component</th><th>How this deck used it</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>Brain</strong></td><td>drafted content with Claude Sonnet, rendered with DeepSeek fallback</td></tr>
+<tr><td><strong>Brain</strong></td><td>drafted content with Claude Sonnet, fallback to DeepSeek for cheaper passes</td></tr>
 <tr><td><strong>Soul</strong></td><td>applied the persona — calm, precise, no filler</td></tr>
-<tr><td><strong>Memory</strong></td><td>Honcho inferred "white bg Apple design, no stock content" → written to user.md</td></tr>
-<tr><td><strong>Manual</strong></td><td>followed <code>wikihow-to-deck</code> skill.md procedure verbatim</td></tr>
-<tr><td><strong>Hands</strong></td><td>terminal (git push), file (md edits), web (Apple HIG docs), delegate (Claude)</td></tr>
-<tr><td><strong>Channel</strong></td><td>delivered through this Discord thread</td></tr>
-<tr><td><strong>Alarm</strong></td><td>none — this was interactive, not cron-triggered</td></tr>
+<tr><td><strong>Memory</strong></td><td>the user.md preference for white-background Apple design carried over</td></tr>
+<tr><td><strong>Manual</strong></td><td>followed the <code>wikihow-to-deck</code> procedure verbatim</td></tr>
+<tr><td><strong>Hands</strong></td><td>terminal (git push), file (md edits), web (Apple HIG docs), delegate (subagent for layout)</td></tr>
+<tr><td><strong>Channel</strong></td><td>delivered through this thread</td></tr>
+<tr><td><strong>Alarm</strong></td><td>not used — this was interactive, not cron-triggered</td></tr>
 </tbody>
 </table>
 
@@ -337,158 +171,30 @@ fallback_chain:
 
 # Links
 
-<div class="card">
+<div style="text-align:center; margin:1em 0;">
 
 **Live deck**
+
 `https://org-a.example.io/project-a/decks/hermes-architecture/`
 
-**Source**
-- [org-a/project-i](https://github.com/org-a/project-i) — SSoT
-- [org-a/project-b](https://github.com/org-a/project-b) — all submodules
-- [org-a/project-h](https://github.com/org-a/project-h) — change history
+**Knowledge**
 
-**Pipeline**
-- [org-a/project-j](https://github.com/org-a/project-j) — LangGraph + cron code
+- project-i — operational wiki
+- project-b — super-repo, all submodules
+- project-h — change logs
+
+**Code**
+
+- project-j — pipeline + cron runners
 
 **This portfolio**
-- [org-a/project-a](https://github.com/org-a/project-a) — repo + Pages
+
+- project-a — repo + Pages
 
 </div>
 
-<div class="small"> Generated by Hermes Agent · July 2026 · Apple-inspired white-mode design</div>
+<div style="text-align:center; font-size:0.7em; color:#6e6e73; margin-top:2em;">
 
-
----
-
-# How We Apply Karpathy's LLM Wiki Method
-
-<p>The LLM Wiki pattern defines five layers, each with a single discipline. We use it as a containment boundary: every page belongs to exactly one layer, and the rules per layer are unambiguous.</p>
-
-<table>
-<thead>
-<tr><th>Layer</th><th>Discipline</th><th>Our state today</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>raw/</strong></td><td>Immutable source files. Never edited after ingest.</td><td>Folder exists. Empty. Reserved for research sources.</td></tr>
-<tr><td><strong>research/</strong></td><td>Typed pages: entity, concept, comparison. Strict frontmatter.</td><td>Folder exists. Empty. Typed ingest not started.</td></tr>
-<tr><td><strong>operational/</strong></td><td>Free-form. Largest layer. Domain knowledge in plain markdown.</td><td>Populated. Eight sub-domains: architecture, analysis, code, infra, watchlist, repos, people, solopreneur.</td></tr>
-<tr><td><strong>logs/</strong></td><td>Timestamped change records. Append-only.</td><td>Submodule. Files named YYYY-MM-DD-HHMM.md.</td></tr>
-<tr><td><strong>schema/</strong></td><td>Rules. The system definition for everything else.</td><td>Two files: AGENTS.md (the contract), SCHEMA.md (the taxonomy and lint).</td></tr>
-</tbody>
-</table>
-
-<p>Three of five layers carry real weight today. The two empty layers are not unfinished business — they are reserved slots. The system knows what goes there; nothing has qualified for ingest yet.</p>
-
-<div class="card">
-
-**What the pattern buys us**
-
-- <strong>No silent drift</strong> — every page declares its layer, and the layer declares its discipline.
-- <strong>Predictable retrieval</strong> — when answering a question, we know which layer to walk.
-- <strong>Front-loaded rigor</strong> — typed pages cost more to write, so we reserve them for things worth the cost.
+Generated by the assistant. White-mode Apple-inspired design.
 
 </div>
-
----
-
-# Our GitHub Structure Design
-
-<p>The knowledge surface is split across multiple repos. The split is driven by access pattern, not by topic.</p>
-
-<pre>
-org-a
-├── project-a       (public — Pages portfolio + slide deck)
-├── project-b       (public — super-repo, aggregates all knowledge)
-│   ├── submodule i (operational wiki + INDEX)
-│   ├── submodule c (assistant-A CLI knowledge)
-│   ├── submodule d (assistant-B CLI knowledge)
-│   ├── submodule e (schedule knowledge)
-│   ├── submodule f (portfolio knowledge)
-│   ├── submodule g (command catalog)
-│   └── submodule h (change logs)
-└── project-j       (public — pipeline code + cron runners)
-</pre>
-
-<p>One <code>git clone --recursive</code> gives the entire knowledge surface. Each submodule owns exactly one domain. The super-repo is a thin aggregator — it adds no content of its own, only pointers.</p>
-
-<h3>Branch and merge rules</h3>
-
-<ul>
-<li><strong>main</strong> — stable. Every commit here is either deployed (Pages) or live in production (cron).</li>
-<li><strong>feature/*</strong> — short-lived. Squash-merged into main. No long-lived branches.</li>
-<li><strong>No develop</strong> — we ship from main. Rollback is a revert commit.</li>
-</ul>
-
-<h3>Frontmatter discipline</h3>
-
-<p>Operational pages carry a small set of optional frontmatter fields:</p>
-
-<pre><code>---
-tags: ["hermes", "architecture", "memory"]
-related: ["analysis/langgraph-pipeline.md"]
-created: 2026-06-08
----</pre>
-
-<p>The <code>related:</code> field is the most-used one. The Brain walks it to navigate the wiki graph.</p>
-
-<h3>Cache busting on Pages</h3>
-
-<p>Static sites on Pages cache aggressively. Every asset URL carries a version suffix, and the served HTML carries <code>Cache-Control: no-cache</code> headers. Without this, we measured roughly 40% of pushes reaching users as stale content.</p>
-
----
-
-# GraphRAG for Search
-
-<p>Plain keyword search isn't enough. The wiki is a graph, not a flat document collection, so we search it like a graph.</p>
-
-<h3>The two stores</h3>
-
-<ul>
-<li><strong>Vector store (Postgres + pgvector)</strong> — semantic search. Query becomes an embedding, embedding becomes top-k similar pages.</li>
-<li><strong>Graph store (Neo4j)</strong> — entity-relationship. Query extracts entities, then walks the graph from those entities along the relationships we declared in frontmatter.</li>
-</ul>
-
-<p>The two are not redundant. Each one answers a different shape of question.</p>
-
-<h3>How a question becomes an answer</h3>
-
-<ol>
-<li><strong>Vector pass</strong> — embed the question, return the top eight pages by cosine similarity. This is the recall layer.</li>
-<li><strong>Entity extraction</strong> — light LLM call extracts candidate entities from the question (ticker names, module names, people, dates).</li>
-<li><strong>Graph walk</strong> — for each extracted entity, pull the neighborhood (1-hop) from the graph: pages, related pages, recent log entries.</li>
-<li><strong>Re-rank</strong> — merge the two result sets. Pages that appear in both ranks higher. Pages whose <code>created</code> date is more recent rank higher when relevance ties.</li>
-<li><strong>Context build</strong> — assemble the top pages into a context window the Brain can read directly. No copy-paste, no manual search.</li>
-</ol>
-
-<h3>What each store is good at</h3>
-
-<table>
-<thead>
-<tr><th>Question shape</th><th>Best store</th><th>Why</th></tr>
-</thead>
-<tbody>
-<tr><td>"Show me pages similar to Y"</td><td>Vector</td><td>Semantic similarity is the whole point.</td></tr>
-<tr><td>"What depends on X?"</td><td>Graph</td><td>Pure relationship traversal.</td></tr>
-<tr><td>"Why did we change our mind about Z?"</td><td>Graph + Logs</td><td>Graph finds the related pages; logs find the commit trail.</td></tr>
-<tr><td>"What's adjacent to W?"</td><td>Hybrid</td><td>Vector surfaces the topic, graph extends the neighborhood.</td></tr>
-<tr><td>"What did we know about V six months ago?"</td><td>Graph + Logs (time-filtered)</td><td>Logs are timestamped, so the filter is a date range.</td></tr>
-</tbody>
-</table>
-
-<h3>What we deliberately do not do</h3>
-
-<ul>
-<li><strong>No reranker model</strong> — the cosine + graph rerank is good enough. Adding a cross-encoder would buy maybe five percent precision at the cost of a hundred milliseconds per query.</li>
-<li><strong>No query rewriting</strong> — the Brain already rewrites the question when it formulates it. Doing it again in the retrieval layer would just amplify the first rewrite's bias.</li>
-<li><strong>No real-time indexing</strong> — pages get embedded at write time, not at read time. A read is always cache-served.</li>
-</ul>
-
-<div class="card">
-
-**Why GraphRAG over plain RAG**
-
-Plain RAG retrieves documents. GraphRAG retrieves <em>relations</em>. The wiki isn't a knowledge base — it's a record of how the system's thinking has evolved over time. The relations <em>are</em> the knowledge.
-
-</div>
-
----
