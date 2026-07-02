@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 920" font-family="-apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fafbfd"/>
+      <stop offset="100%" stop-color="#f3f6fb"/>
+    </linearGradient>
+    <linearGradient id="layer0" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a8c7fa"/>
+      <stop offset="100%" stop-color="#669df6"/>
+    </linearGradient>
+    <linearGradient id="layer1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7ec5ff"/>
+      <stop offset="100%" stop-color="#1a73e8"/>
+    </linearGradient>
+    <linearGradient id="layer2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4285f4"/>
+      <stop offset="100%" stop-color="#0b57d0"/>
+    </linearGradient>
+    <linearGradient id="layer3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1a73e8"/>
+      <stop offset="100%" stop-color="#072e6c"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5f6368"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a73e8"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="920" fill="url(#bg)"/>
+
+  <text x="640" y="48" text-anchor="middle" font-size="26" font-weight="700" fill="#202124">Hermes Memory Pipeline</text>
+  <text x="640" y="74" text-anchor="middle" font-size="14" fill="#5f6368">4-Layer Architecture · Memory Tool → GitHub Wiki → Neo4j GraphRAG → Lazy Search</text>
+
+  <g filter="url(#shadow)">
+    <rect x="490" y="100" width="300" height="50" rx="25" fill="#ffffff" stroke="#dadce0"/>
+    <text x="640" y="132" text-anchor="middle" font-size="16" font-weight="600" fill="#202124">👤  User (aiprofit)</text>
+  </g>
+  <text x="640" y="170" text-anchor="middle" font-size="11" fill="#5f6368">@mention / cron / API gateway</text>
+
+  <line x1="640" y1="155" x2="640" y2="210" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="140" y="210" width="1000" height="120" rx="14" fill="url(#layer0)"/>
+    <text x="170" y="240" font-size="14" font-weight="700" fill="#fff">LAYER 0 · MEMORY TOOL</text>
+    <text x="170" y="262" font-size="13" fill="#fff" opacity="0.95">Hot cache · 2,200 chars (89% used) · prompt cache hit (TTL 5m)</text>
+  </g>
+
+  <line x1="640" y1="330" x2="640" y2="385" stroke="#1a73e8" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <text x="650" y="362" font-size="10" font-weight="600" fill="#1a73e8">memory_sync.sh · push to Layer 1</text>
+
+  <g filter="url(#shadow)">
+    <rect x="140" y="385" width="1000" height="120" rx="14" fill="url(#layer1)"/>
+    <text x="170" y="415" font-size="14" font-weight="700" fill="#fff">LAYER 1 · GITHUB WIKI  (영속 원본)</text>
+    <text x="170" y="437" font-size="13" fill="#fff" opacity="0.95">mybotagent/hermes-wiki · 200+ markdown pages · Karpathy 패턴</text>
+  </g>
+
+  <line x1="640" y1="505" x2="640" y2="560" stroke="#1a73e8" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <text x="650" y="537" font-size="10" font-weight="600" fill="#1a73e8">wiki_reindex.sh · submodule sync + incremental indexer (12s)</text>
+
+  <g filter="url(#shadow)">
+    <rect x="140" y="560" width="1000" height="120" rx="14" fill="url(#layer2)"/>
+    <text x="170" y="590" font-size="14" font-weight="700" fill="#fff">LAYER 2 · NEO4J GRAPHRAG  (인덱스)</text>
+    <text x="170" y="612" font-size="13" fill="#fff" opacity="0.95">wiki-knowledge-search v0.2.0 · 35 pages indexed · architecture 5 · 384d MiniLM</text>
+  </g>
+
+  <line x1="640" y1="680" x2="640" y2="735" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="650" y="712" font-size="10" font-weight="600" fill="#5f6368">query.py · 3-mode auto · latency 3-4s</text>
+
+  <g filter="url(#shadow)">
+    <rect x="140" y="735" width="1000" height="100" rx="14" fill="url(#layer3)"/>
+    <text x="170" y="765" font-size="14" font-weight="700" fill="#fff">LAYER 3 · 채니봇 LAZY SEARCH</text>
+    <text x="170" y="787" font-size="13" fill="#fff" opacity="0.95">semantic / structural / hybrid → 자연어 합성 + provenance</text>
+  </g>
+</svg>

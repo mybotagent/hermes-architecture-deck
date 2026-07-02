@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Memory Pipeline — Hermes Architecture</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css?v=20260702">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css?v=20260702">
+
+<style>
+:root {
+  --primary: #0066cc;
+  --primary-focus: #0071e3;
+  --ink: #1d1d1f;
+  --body: #1d1d1f;
+  --body-muted: #6e6e73;
+  --canvas: #ffffff;
+  --canvas-parchment: #f5f5f7;
+  --divider: #d2d2d7;
+  --hairline: #e0e0e0;
+}
+html, body {
+  background: var(--canvas);
+  color: var(--body);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+.reveal { width: 100%; height: 100%; position: relative; background: #fff; }
+.reveal .slides { width: 100% !important; height: 100% !important; transform: none !important; inset: 0 !important; position: absolute; }
+.reveal .slides > section {
+  width: 100% !important; height: 100% !important;
+  position: absolute !important; top: 0 !important; left: 0 !important;
+  display: none !important; padding: 4vh 4vw; text-align: center; overflow: hidden;
+  background: #ffffff;
+}
+.reveal .slides > section.present { display: block !important; }
+.reveal h1 { font-family: -apple-system, "SF Pro Display", sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 600; line-height: 1.07; letter-spacing: -0.035em; color: var(--ink); margin: 0 auto 0.5em; max-width: 16ch; }
+.reveal h2 { font-size: clamp(1.4rem, 3.5vw, 2.2rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.025em; color: var(--ink); margin: 0 auto 0.5em; }
+.reveal h3 { font-size: clamp(1rem, 2.2vw, 1.3rem); font-weight: 600; color: var(--ink); margin: 0.5em auto 0.4em; text-align: left; }
+.reveal p, .reveal li { font-size: clamp(0.85rem, 1.7vw, 1.05rem); line-height: 1.5; color: var(--body); text-align: left; max-width: 70ch; margin: 0 auto 0.7em; }
+.reveal strong { font-weight: 600; color: var(--ink); }
+.reveal em { font-style: italic; color: var(--primary); }
+.reveal code { background: var(--canvas-parchment); color: var(--primary); padding: 0.1em 0.45em; border-radius: 6px; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.88em; }
+.reveal pre { background: var(--canvas-parchment); border: 1px solid var(--hairline); border-radius: 14px; padding: 1em 1.4em; font-size: 0.78rem; line-height: 1.55; margin: 0.5em auto 1em; width: 95%; max-width: 800px; }
+.reveal blockquote { background: var(--canvas-parchment); border-left: 3px solid var(--primary); padding: 1em 1.4em; font-style: italic; border-radius: 0 14px 14px 0; margin: 1em auto; max-width: 65ch; text-align: left; }
+.reveal table { font-size: clamp(0.7rem, 1.4vw, 0.85rem); border-collapse: separate; border-spacing: 0; margin: 1em auto; max-width: 800px; border: 1px solid var(--divider); border-radius: 14px; overflow: hidden; width: 100%; }
+.reveal th { background: var(--canvas-parchment); color: var(--ink); padding: 0.7em 1em; text-align: left; font-weight: 600; border-bottom: 1px solid var(--divider); }
+.reveal td { padding: 0.55em 1em; border-bottom: 1px solid var(--hairline); color: var(--body); }
+.reveal tr:last-child td { border-bottom: none; }
+.reveal tr:nth-child(even) { background: rgba(0,0,0,0.015); }
+.reveal .card { background: var(--canvas-parchment); border: 1px solid var(--hairline); border-radius: 18px; padding: 1.4em 1.8em; margin: 1em auto; max-width: 780px; text-align: left; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+.reveal .small { display: block; font-size: 0.7em; color: var(--body-muted); font-weight: 300; text-align: center; margin: 0.8em auto 0; }
+.reveal .flow-svg { max-width: 1200px; width: 95%; margin: 0 auto; }
+.reveal .progress { background: rgba(0,0,0,0.06); height: 3px; }
+.reveal .progress span { background: var(--primary); }
+.reveal .controls { color: var(--primary); opacity: 0.6; }
+@media (max-width: 600px) {
+  .reveal .slides > section { padding: 3vh 4vw; }
+  .reveal h1 { font-size: 1.7rem; }
+  .reveal h2 { font-size: 1.2rem; }
+}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section>
+  <h1>Hermes <em>Memory Pipeline</em></h1>
+  <p>4-Layer Architecture · Memory Tool → GitHub Wiki → Neo4j GraphRAG → Lazy Search</p>
+  <p style="text-align:center"><a href="?print-pdf" target="_blank">📄 Print/PDF</a> · <a href="../index.html">← Portfolio</a></p>
+  <p class="small">Built 2026-07-02 · mybotagent/Hermes Memory Pipeline v1.0</p>
+</section>
+
+<section>
+  <h2>전체 <em>아키텍처</em> 흐름도</h2>
+  <img class="flow-svg" src="../../assets/memory-pipeline-flow.svg" alt="Memory Pipeline 4-Layer Flow"/>
+  <p class="small">SVG · 4-Layer pipeline · User → Memory → Wiki → Neo4j → Lazy Search</p>
+</section>
+
+<section>
+  <h2>왜 이 <em>4-Layer</em>인가</h2>
+  <table>
+    <thead>
+      <tr><th>한계</th><th>해결</th><th>Layer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Memory tool 2,200자</td><td>GitHub 영속 무제한</td><td>Layer 0 → 1</td></tr>
+      <tr><td>검색 불가</td><td>Neo4j vector + graph</td><td>Layer 1 → 2</td></tr>
+      <tr><td>전체 로드 비용</td><td>Lazy query 3-mode</td><td>Layer 2 → 3</td></tr>
+      <tr><td>반복 토큰 비용</td><td>prompt cache 5m</td><td>전체</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>실제 <em>작동 결과</em> (a 4-step + a-2 검증)</h2>
+  <table>
+    <thead>
+      <tr><th>검증 항목</th><th>결과</th><th>산출물</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>query.py 응답</td><td>✅ 3-4s</td><td>latency 측정</td></tr>
+      <tr><td>의미 있는 검색</td><td>✅ 5건 결과</td><td>"memory pipeline" 1위 (0.856)</td></tr>
+      <tr><td>memory → wiki push</td><td>✅ b785d5b</td><td>memory_sync.sh</td></tr>
+      <tr><td>wiki → Neo4j 자동 sync</td><td>✅ 매일 21:00 KST</td><td>wiki_reindex.sh + cron</td></tr>
+      <tr><td>git push → search 반영</td><td>✅ end-to-end</td><td>architecture/hermes-memory-pipeline.md 1위</td></tr>
+    </tbody>
+  </table>
+  <p class="small">2026-07-02 a-2 검증 통과 — 디자인-실행 갭 20% 미만</p>
+</section>
+
+<section>
+  <h2>5-Stage <em>검증 루프</em></h2>
+  <p style="text-align:center">
+    <strong>why</strong> → <strong>what</strong> → <strong>whether</strong> → <strong>what</strong> → <strong>how</strong> → <strong style="color:#0066cc">validate</strong>
+  </p>
+  <div class="card">
+    <p><em>why</em>: 진짜 필요한가? (가치 검증) → <em>what</em>: 무엇이 일어났나 (수치화) → <em>whether</em>: 측정이 옳은가 (메트릭 의심) → <em>what</em>: 진짜 무엇을 측정할 것인가 (옳은 정의) → <em>how</em>: 변경안 (cron·config·SOUL diff) → <em style="color:#0066cc">validate</em>: 측정 가능한 신호 확인</p>
+    <p class="small">자가개선 루프 + critical 분석 + 회의 facilitation의 기본 공식 (2026-07-02 합의, 메모리 entry #15)</p>
+  </div>
+</section>
+
+<section>
+  <h2>Operational <em>자산</em></h2>
+  <table>
+    <thead>
+      <tr><th>자산</th><th>용도</th><th>위치</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>memory_sync.sh</code></td><td>memory → wiki push + reindex</td><td><code>~/.hermes/scripts/</code></td></tr>
+      <tr><td><code>wiki_reindex.sh</code></td><td>submodule sync + Neo4j reindex</td><td><code>~/.hermes/scripts/</code></td></tr>
+      <tr><td><code>memory_alert.sh</code></td><td>memory 한계 90% 알림 (자동 압축 X)</td><td><code>~/.hermes/scripts/</code></td></tr>
+      <tr><td>Cron 등록</td><td>매일 21:00 KST</td><td>crontab -l</td></tr>
+      <tr><td>위키 디자인</td><td>4-Layer DESIGN 페이지</td><td><a href="https://github.com/mybotagent/hermes-wiki/blob/main/architecture/hermes-memory-pipeline.md">hermes-wiki/architecture</a></td></tr>
+      <tr><td>회의 영속</td><td>5파일 구조</td><td><a href="https://github.com/mybotagent/meeting-notes/tree/main/2026/07/02">meeting-notes 1926</a></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>열린 <em>의제</em></h2>
+  <ul>
+    <li>Phase 2 — memory → wiki watcher 자동화 (trigger 정책 합의 후)</li>
+    <li>Phase 3 — 자동 압축 (단일공식 검증 후 안전화 시)</li>
+    <li>Phase 5 — cache evict hook (mid-session stale 위험)</li>
+    <li>wiki-knowledge-search v0.3 업그레이드 평가 (incremental 옵션)</li>
+  </ul>
+  <p class="small">디자인-실행 갭 20% 남음 · M3 활용도 criterion 실측 진행 중</p>
+</section>
+
+<section>
+  <h1>끝. <em>Push & validate.</em></h1>
+  <p style="text-align:center"><a href="../../index.html">← Portfolio</a> · <a href="https://github.com/mybotagent/hermes-wiki">hermes-wiki</a> · <a href="https://github.com/mybotagent/meeting-notes">meeting-notes</a></p>
+  <p class="small">2026-07-02 · 채니봇 · a + a-2 · 5-stage verified</p>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js?v=20260702"></script>
+<script>
+Reveal.initialize({
+  hash: true, controls: true, progress: true, slideNumber: false,
+  overview: true, center: false, disableLayout: true,
+  transition: 'slide', transitionSpeed: 'fast',
+});
+</script>
+<style>.reveal .slide-number,.reveal .slide-number-pdf,.reveal .slide-suffix { display: none !important; }</style>
+</body>
+</html>
