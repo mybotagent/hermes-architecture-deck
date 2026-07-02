@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Memory Pipeline — Hermes Architecture</title>
@@ -74,91 +74,87 @@ html, body {
 <section>
   <h1>Hermes <em>Memory Pipeline</em></h1>
   <p>4-Layer Architecture · Memory Tool → GitHub Wiki → Neo4j GraphRAG → Lazy Search</p>
-  <p style="text-align:center"><a href="?print-pdf" target="_blank">📄 Print/PDF</a> · <a href="../index.html">← Portfolio</a></p>
+  <p style="text-align:center"><a href="?print-pdf" target="_blank">📄 Print/PDF</a> · <a href="../../index.html">← Portfolio</a></p>
   <p class="small">Built 2026-07-02 · mybotagent/Hermes Memory Pipeline v1.0</p>
 </section>
 
 <section>
-  <h2>전체 <em>아키텍처</em> 흐름도</h2>
+  <h2>End-to-End <em>Architecture</em> Flow</h2>
   <img class="flow-svg" src="../../assets/memory-pipeline-flow.svg" alt="Memory Pipeline 4-Layer Flow"/>
   <p class="small">SVG · 4-Layer pipeline · User → Memory → Wiki → Neo4j → Lazy Search</p>
 </section>
 
 <section>
-  <h2>왜 이 <em>4-Layer</em>인가</h2>
+  <h2>Why These <em>4 Layers</em></h2>
+  <p style="text-align:center; color: var(--body-muted); font-size: clamp(0.8rem, 1.5vw, 0.95rem);">Each layer removes a specific limitation of the one below it.</p>
   <table>
     <thead>
-      <tr><th>한계</th><th>해결</th><th>Layer</th></tr>
+      <tr><th>Limitation</th><th>Solution</th><th>Layer</th></tr>
     </thead>
     <tbody>
-      <tr><td>Memory tool 2,200자</td><td>GitHub 영속 무제한</td><td>Layer 0 → 1</td></tr>
-      <tr><td>검색 불가</td><td>Neo4j vector + graph</td><td>Layer 1 → 2</td></tr>
-      <tr><td>전체 로드 비용</td><td>Lazy query 3-mode</td><td>Layer 2 → 3</td></tr>
-      <tr><td>반복 토큰 비용</td><td>prompt cache 5m</td><td>전체</td></tr>
+      <tr><td>Memory tool capped at 2,200 chars</td><td>GitHub wiki, unlimited persistence</td><td>Layer 0 → 1</td></tr>
+      <tr><td>Keyword search only</td><td>Neo4j vector + graph retrieval</td><td>Layer 1 → 2</td></tr>
+      <tr><td>Full wiki load is expensive</td><td>Lazy query, 3 modes (semantic/structural/hybrid)</td><td>Layer 2 → 3</td></tr>
+      <tr><td>Repeated token cost</td><td>Prompt cache, 5-minute TTL</td><td>All layers</td></tr>
     </tbody>
   </table>
 </section>
 
 <section>
-  <h2>실제 <em>작동 결과</em> (a 4-step + a-2 검증)</h2>
+  <h2>Validated <em>End-to-End</em></h2>
+  <p style="text-align:center; color: var(--body-muted); font-size: clamp(0.8rem, 1.5vw, 0.95rem);">Pushed, reindexed, queried — every step measured.</p>
   <table>
     <thead>
-      <tr><th>검증 항목</th><th>결과</th><th>산출물</th></tr>
+      <tr><th>Check</th><th>Result</th><th>Artifact</th></tr>
     </thead>
     <tbody>
-      <tr><td>query.py 응답</td><td>✅ 3-4s</td><td>latency 측정</td></tr>
-      <tr><td>의미 있는 검색</td><td>✅ 5건 결과</td><td>"memory pipeline" 1위 (0.856)</td></tr>
-      <tr><td>memory → wiki push</td><td>✅ b785d5b</td><td>memory_sync.sh</td></tr>
-      <tr><td>wiki → Neo4j 자동 sync</td><td>✅ 매일 21:00 KST</td><td>wiki_reindex.sh + cron</td></tr>
-      <tr><td>git push → search 반영</td><td>✅ end-to-end</td><td>architecture/hermes-memory-pipeline.md 1위</td></tr>
+      <tr><td><code>query.py</code> response time</td><td>✅ 3–4 s</td><td>Wall-clock latency</td></tr>
+      <tr><td>Top-result relevance</td><td>✅ 5 hits</td><td><em>"memory pipeline"</em> ranked #1 (0.856)</td></tr>
+      <tr><td>Memory → wiki push</td><td>✅ commit b785d5b</td><td><code>memory_sync.sh</code></td></tr>
+      <tr><td>Wiki → Neo4j auto-sync</td><td>✅ Daily at 21:00 KST</td><td><code>wiki_reindex.sh</code> + cron</td></tr>
+      <tr><td>Git push → search hit</td><td>✅ End-to-end</td><td><code>architecture/hermes-memory-pipeline.md</code> ranks #1</td></tr>
     </tbody>
   </table>
-  <p class="small">2026-07-02 a-2 검증 통과 — 디자인-실행 갭 20% 미만</p>
+  <p class="small">2026-07-02 · Design-execution gap &lt; 20% · 5-stage verified</p>
 </section>
 
 <section>
-  <h2>5-Stage <em>검증 루프</em></h2>
+  <h2>The <em>5-Stage</em> Verification Loop</h2>
   <p style="text-align:center">
     <strong>why</strong> → <strong>what</strong> → <strong>whether</strong> → <strong>what</strong> → <strong>how</strong> → <strong style="color:#0066cc">validate</strong>
   </p>
   <div class="card">
-    <p><em>why</em>: 진짜 필요한가? (가치 검증) → <em>what</em>: 무엇이 일어났나 (수치화) → <em>whether</em>: 측정이 옳은가 (메트릭 의심) → <em>what</em>: 진짜 무엇을 측정할 것인가 (옳은 정의) → <em>how</em>: 변경안 (cron·config·SOUL diff) → <em style="color:#0066cc">validate</em>: 측정 가능한 신호 확인</p>
-    <p class="small">자가개선 루프 + critical 분석 + 회의 facilitation의 기본 공식 (2026-07-02 합의, 메모리 entry #15)</p>
+    <p><em>why</em> — Is this worth doing? (value check) → <em>what</em> — What actually happened? (quantify) → <em>whether</em> — Is the metric itself sound? (measure-of-the-measure) → <em>what</em> — What should we really be measuring? (correct definition) → <em>how</em> — What change addresses it? (cron, config, soul diff) → <em style="color:#0066cc">validate</em> — Confirm with a measurable signal.</p>
+    <p class="small">Foundational loop for self-improvement, critical analysis, and meeting facilitation.</p>
   </div>
 </section>
 
 <section>
-  <h2>Operational <em>자산</em></h2>
+  <h2>Operational <em>Assets</em></h2>
   <table>
     <thead>
-      <tr><th>자산</th><th>용도</th><th>위치</th></tr>
+      <tr><th>Asset</th><th>Purpose</th><th>Location</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>memory_sync.sh</code></td><td>memory → wiki push + reindex</td><td><code>~/.hermes/scripts/</code></td></tr>
-      <tr><td><code>wiki_reindex.sh</code></td><td>submodule sync + Neo4j reindex</td><td><code>~/.hermes/scripts/</code></td></tr>
-      <tr><td><code>memory_alert.sh</code></td><td>memory 한계 90% 알림 (자동 압축 X)</td><td><code>~/.hermes/scripts/</code></td></tr>
-      <tr><td>Cron 등록</td><td>매일 21:00 KST</td><td>crontab -l</td></tr>
-      <tr><td>위키 디자인</td><td>4-Layer DESIGN 페이지</td><td><a href="https://github.com/mybotagent/hermes-wiki/blob/main/architecture/hermes-memory-pipeline.md">hermes-wiki/architecture</a></td></tr>
-      <tr><td>회의 영속</td><td>5파일 구조</td><td><a href="https://github.com/mybotagent/meeting-notes/tree/main/2026/07/02">meeting-notes 1926</a></td></tr>
+      <tr><td><code>memory_sync.sh</code></td><td>Memory → wiki push + reindex</td><td><code>~/.hermes/scripts/</code></td></tr>
+      <tr><td><code>wiki_reindex.sh</code></td><td>Submodule sync + Neo4j incremental reindex</td><td><code>~/.hermes/scripts/</code></td></tr>
+      <tr><td><code>memory_alert.sh</code></td><td>90% memory-cap alert (no auto-compression)</td><td><code>~/.hermes/scripts/</code></td></tr>
+      <tr><td>Cron registration</td><td>Daily at 21:00 KST</td><td><code>crontab -l</code></td></tr>
+      <tr><td>Wiki design page</td><td>Full 4-Layer architecture write-up</td><td><a href="https://github.com/mybotagent/hermes-wiki/blob/main/architecture/hermes-memory-pipeline.md">hermes-wiki/architecture</a></td></tr>
+      <tr><td>Meeting notes</td><td>Design decisions &amp; rationale</td><td><a href="https://github.com/mybotagent/meeting-notes/tree/main/2026/07/02">meeting-notes/2026/07/02</a></td></tr>
     </tbody>
   </table>
 </section>
 
 <section>
-  <h2>열린 <em>의제</em></h2>
+  <h2>Open <em>Workstreams</em></h2>
   <ul>
-    <li>Phase 2 — memory → wiki watcher 자동화 (trigger 정책 합의 후)</li>
-    <li>Phase 3 — 자동 압축 (단일공식 검증 후 안전화 시)</li>
-    <li>Phase 5 — cache evict hook (mid-session stale 위험)</li>
-    <li>wiki-knowledge-search v0.3 업그레이드 평가 (incremental 옵션)</li>
+    <li><strong>Phase 2</strong> — Automate the memory → wiki watcher (awaiting trigger-policy alignment).</li>
+    <li><strong>Phase 3</strong> — Auto-compression (gated on single-formula safety review).</li>
+    <li><strong>Phase 5</strong> — Cache-evict hook (mid-session staleness risk to mitigate).</li>
+    <li><strong>v0.3 upgrade</strong> — Evaluate <code>wiki-knowledge-search</code> incremental options.</li>
   </ul>
-  <p class="small">디자인-실행 갭 20% 남음 · M3 활용도 criterion 실측 진행 중</p>
-</section>
-
-<section>
-  <h1>끝. <em>Push & validate.</em></h1>
-  <p style="text-align:center"><a href="../../index.html">← Portfolio</a> · <a href="https://github.com/mybotagent/hermes-wiki">hermes-wiki</a> · <a href="https://github.com/mybotagent/meeting-notes">meeting-notes</a></p>
-  <p class="small">2026-07-02 · 채니봇 · a + a-2 · 5-stage verified</p>
+  <p class="small">Design-execution gap ~ 20% · closing via the 5-stage loop.</p>
 </section>
 
 </div>
